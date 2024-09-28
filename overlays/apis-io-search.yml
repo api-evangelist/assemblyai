@@ -1,0 +1,87 @@
+name: AssemblyAI
+description: >-
+  Built by AI experts, AssemblyAI’s Speech AI models include accurate
+  speech-to-text for voice data (such as calls, virtual meetings, and podcasts),
+  speaker detection, sentiment analysis, chapter detection, PII redaction, and
+  more.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-search/ai/main/_data/assemblyai/overlays/apis-io-search.yml
+modified: '2024-06-06T00:00:00.000Z'
+specificationVersion: '0.18'
+tags:
+  - AI
+apis:
+  - name: AssemblyAI API
+    description: >-
+      Built by AI experts, AssemblyAI’s Speech AI models include accurate
+      speech-to-text for voice data (such as calls, virtual meetings, and
+      podcasts), speaker detection, sentiment analysis, chapter detection, PII
+      redaction, and more.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.assemblyai.com/docs/
+    baseURL: https://platform.openai.com/
+    tags:
+      - Files
+      - Media
+      - Uploads
+      - Audio
+      - Transcribe
+      - Transcripts
+      - Format
+      - Subtitle
+      - Subtitles
+      - Sentences
+      - Paragraphs
+      - Search
+      - Word
+      - Words
+      - Redacted
+      - Authentication
+      - Real Time
+      - STT
+      - Streaming
+      - Temporary
+      - Tokens
+      - Generate
+      - Le
+      - Lemur
+      - MUR
+      - Runs
+      - Tasks
+      - Using
+      - Summaries
+      - Summarize
+      - Answers
+      - Ask
+      - Questions
+      - Actions
+      - Extract
+      - Items
+      - Data
+      - Purge
+    properties:
+      - type: Documentation
+        url: https://www.assemblyai.com/docs/
+      - type: OpenAPI
+        url: properties/assemblyai-openapi-original.yml
+      - type: AsyncAPI
+        url: properties/assemblyai-asyncapi-original.yml
+    aid: assemblyai:assemblyai
+    score: 546
+    overlays:
+      - type: API Evangelist Ratings
+        url: overlays/assemblyai-openapi-api-evangelist-ratings.yml
+common:
+  - type: Getting Started
+    url: https://www.assemblyai.com/docs/
+maintainers:
+  - FN: API Evangelist
+    url: http://apievangelist.com
+    email: info@apievangelist.com
+overlays:
+  - type: APIs.io Search
+    url: overlays/apis-io-search.yml
+  - type: API Evangelist Ratings
+    url: /overlays/api-evangelist-ratings.yml
+aid: assemblyai
+score: 65
