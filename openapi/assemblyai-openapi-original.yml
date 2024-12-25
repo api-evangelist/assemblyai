@@ -1,0 +1,798 @@
+openapi: 3.1.0
+
+info:
+  title: AssemblyAI API
+  description: AssemblyAI API
+  version: 1.1.2
+  contact:
+    name: API Support
+    email: support@assemblyai.com
+    url: https://www.assemblyai.com/docs/
+
+servers:
+  - url: https://api.assemblyai.com
+    description: AssemblyAI API
+
+tags:
+  - name: transcript
+    description: Transcript related operations
+    externalDocs:
+      url: https://www.assemblyai.com/docs/guides/transcribing-an-audio-file
+  - name: LeMUR
+    description: LeMUR related operations
+    externalDocs:
+      url: https://www.assemblyai.com/docs/guides/processing-audio-with-llms-using-lemur
+  - name: streaming
+    description: Streaming Speech-to-Text
+    externalDocs:
+      url: https://www.assemblyai.com/docs/speech-to-text/streaming
+
+security:
+  - ApiKey: []
+
+paths:
+  /v2/upload:
+    post:
+      tags:
+        - transcript
+      summary: Upload a media file
+      description: Upload a media file to AssemblyAI's servers.
+      operationId: uploadFile
+      x-fern-sdk-group-name: files
+      x-fern-sdk-method-name: upload
+      requestBody:
+        content:
+          application/octet-stream: {}
+      responses:
+        "200":
+          x-label: Media file uploaded
+          description: Media file uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadedFile"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript:
+    post:
+      tags:
+        - transcript
+      summary: Transcribe audio
+      description: Create a transcript from a media file that is accessible via a URL.
+      operationId: createTranscript
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: submit
+      x-fern-request-name: TranscriptParams
+      requestBody:
+        description: Params to create a transcript
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TranscriptParams"
+      responses:
+        "200":
+          x-label: Transcript created
+          description: Transcript created and queued for processing
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transcript"
+          links:
+            GetTranscriptById:
+              $ref: "#/components/links/GetTranscriptById"
+            GetTranscriptSentencesById:
+              $ref: "#/components/links/GetTranscriptSentencesById"
+            GetTranscriptParagraphsById:
+              $ref: "#/components/links/GetTranscriptParagraphsById"
+            GetTranscriptSubtitlesById:
+              $ref: "#/components/links/GetTranscriptSubtitlesById"
+            GetTranscriptRedactedAudioById:
+              $ref: "#/components/links/GetTranscriptRedactedAudioById"
+            WordSearchByTranscriptId:
+              $ref: "#/components/links/WordSearchByTranscriptId"
+            DeleteTranscriptById:
+              $ref: "#/components/links/DeleteTranscriptById"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+      callbacks:
+        transcriptWebhook:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/TranscriptReadyNotification"
+
+              responses:
+                "200":
+                  description: Successfully received the notification
+
+    get:
+      tags:
+        - transcript
+      summary: List transcripts
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: list
+      x-fern-request-name: ListTranscriptParams
+      operationId: listTranscripts
+      description: |
+        Retrieve a list of transcripts you created.
+        Transcripts are sorted from newest to oldest. The previous URL always points to a page with older transcripts.
+      parameters:
+        - name: limit
+          x-label: Limit
+          in: query
+          description: Maximum amount of transcripts to retrieve
+          schema:
+            $ref: "#/components/schemas/ListTranscriptParams/properties/limit"
+        - name: status
+          x-label: Status
+          in: query
+          description: Filter by transcript status
+          schema:
+            # Use TranscriptStatus instead of
+            # ListTranscriptParams/properties/limit for better SDK generation
+            $ref: "#/components/schemas/TranscriptStatus"
+
+        - name: created_on
+          x-label: Created on
+          in: query
+          description: Only get transcripts created on this date
+          schema:
+            $ref: "#/components/schemas/ListTranscriptParams/properties/created_on"
+
+        - name: before_id
+          x-label: Before ID
+          in: query
+          description: Get transcripts that were created before this transcript ID
+          schema:
+            $ref: "#/components/schemas/ListTranscriptParams/properties/before_id"
+
+        - name: after_id
+          x-label: After ID
+          in: query
+          description: Get transcripts that were created after this transcript ID
+          schema:
+            $ref: "#/components/schemas/ListTranscriptParams/properties/after_id"
+
+        - name: throttled_only
+          x-label: Throttled only
+          in: query
+          description: Only get throttled transcripts, overrides the status filter
+          schema:
+            $ref: "#/components/schemas/ListTranscriptParams/properties/throttled_only"
+      responses:
+        "200":
+          description: |
+            A list of transcripts. Transcripts are sorted from newest to oldest. The previous URL always points to a page with older transcripts.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TranscriptList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript/{transcript_id}:
+    get:
+      tags:
+        - transcript
+      summary: Get transcript
+      operationId: getTranscript
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: get
+      x-fern-request-name: GetTranscriptParams
+      description: Get the transcript resource. The transcript is ready when the "status" is "completed".
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The transcript resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transcript"
+          links:
+            GetTranscriptById:
+              $ref: "#/components/links/GetTranscriptById"
+            GetTranscriptSentencesById:
+              $ref: "#/components/links/GetTranscriptSentencesById"
+            GetTranscriptParagraphsById:
+              $ref: "#/components/links/GetTranscriptParagraphsById"
+            GetTranscriptSubtitlesById:
+              $ref: "#/components/links/GetTranscriptSubtitlesById"
+            GetTranscriptRedactedAudioById:
+              $ref: "#/components/links/GetTranscriptRedactedAudioById"
+            WordSearchByTranscriptId:
+              $ref: "#/components/links/WordSearchByTranscriptId"
+            DeleteTranscriptById:
+              $ref: "#/components/links/DeleteTranscriptById"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+    delete:
+      tags:
+        - transcript
+      summary: Delete transcript
+      description: |
+        Delete the transcript.
+        Deleting does not delete the resource itself, but removes the data from the resource and marks it as deleted.
+      operationId: deleteTranscript
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: delete
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The deleted transcript response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transcript"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript/{transcript_id}/{subtitle_format}:
+    get:
+      tags:
+        - transcript
+      summary: Get subtitles for transcript
+      description: Export your transcript in SRT or VTT format to use with a video player for subtitles and closed captions.
+      operationId: getSubtitles
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: getSubtitles
+      x-fern-request-name: GetSubtitlesParams
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+        - name: subtitle_format
+          x-label: Subtitle format
+          in: path
+          description: The format of the captions
+          required: true
+          schema:
+            $ref: "#/components/schemas/SubtitleFormat"
+        - name: chars_per_caption
+          x-label: Number of characters per caption
+          in: query
+          description: The maximum number of characters per caption
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: The exported captions as text
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  WEBVTT
+                  00:12.340 --> 00:16.220
+                  Last year I showed these two slides said that demonstrate
+                  00:16.200 --> 00:20.040
+                  that the Arctic ice cap which for most of the last 3,000,000 years has been the
+                  00:20.020 --> 00:25.040
+                  size of the lower 48 States has shrunk by 40% but this understates
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript/{transcript_id}/sentences:
+    get:
+      tags:
+        - transcript
+      summary: Get sentences in transcript
+      operationId: getTranscriptSentences
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: getSentences
+      x-fern-request-name: GetSentencesParams
+      description: Get the transcript split by sentences. The API will attempt to semantically segment the transcript into sentences to create more reader-friendly transcripts.
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Exported sentences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SentencesResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript/{transcript_id}/paragraphs:
+    get:
+      tags:
+        - transcript
+      summary: Get paragraphs in transcript
+      operationId: getTranscriptParagraphs
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: getParagraphs
+      x-fern-request-name: GetParagraphsParams
+      description: Get the transcript split by paragraphs. The API will attempt to semantically segment your transcript into paragraphs to create more reader-friendly transcripts.
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Exported paragraphs
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParagraphsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript/{transcript_id}/word-search:
+    get:
+      tags:
+        - transcript
+      summary: Search words in transcript
+      description: Search through the transcript for keywords. You can search for individual words, numbers, or phrases containing up to five words or numbers.
+      operationId: wordSearch
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: wordSearch
+      x-fern-request-name: WordSearchParams
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+        - name: words
+          x-label: Words
+          in: query
+          description: Keywords to search for
+          required: true
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              x-label: Word
+              type: string
+
+      responses:
+        "200":
+          description: Word search response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WordSearchResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/transcript/{transcript_id}/redacted-audio:
+    get:
+      tags:
+        - transcript
+      summary: Get redacted audio
+      description: Retrieve the redacted audio object containing the status and URL to the redacted audio.
+      operationId: getRedactedAudio
+      x-fern-sdk-group-name: transcripts
+      x-fern-sdk-method-name: getRedactedAudio
+      x-fern-request-name: GetRedactedAudioParams
+      parameters:
+        - name: transcript_id
+          x-label: Transcript ID
+          in: path
+          description: ID of the transcript
+          required: true
+          schema:
+            type: string
+
+      responses:
+        "200":
+          description: The redacted audio object containing the status and URL to the redacted audio
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RedactedAudioResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /v2/realtime/token:
+    post:
+      tags:
+        - streaming
+      summary: Create temporary authentication token for Streaming STT
+      description: Create a temporary authentication token for Streaming Speech-to-Text
+      operationId: createTemporaryToken
+      x-fern-sdk-group-name: realtime
+      x-fern-sdk-method-name: createTemporaryToken
+      x-fern-request-name: CreateRealtimeTemporaryTokenParams
+      requestBody:
+        description: Params to create a temporary authentication token
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRealtimeTemporaryTokenParams"
+      responses:
+        "200":
+          description: Temporary authentication token generated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RealtimeTemporaryTokenResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /lemur/v3/generate/task:
+    post:
+      tags:
+        - LeMUR
+      summary: Run a task using LeMUR
+      description: Use the LeMUR task endpoint to input your own LLM prompt.
+      operationId: lemurTask
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: task
+      x-fern-request-name: LemurTaskParams
+      requestBody:
+        description: Params to run the task
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LemurTaskParams"
+      responses:
+        "200":
+          description: LeMUR task response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LemurTaskResponse"
+          links:
+            PurgeLemurRequestDataById:
+              $ref: "#/components/links/PurgeLemurRequestDataById"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /lemur/v3/generate/summary:
+    post:
+      tags:
+        - LeMUR
+      summary: Summarize a transcript using LeMUR
+      description: |
+        Custom Summary allows you to distill a piece of audio into a few impactful sentences.
+        You can give the model context to obtain more targeted results while outputting the results in a variety of formats described in human language.
+      operationId: lemurSummary
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: summary
+      x-fern-request-name: LemurSummaryParams
+      requestBody:
+        description: Params to generate the summary
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LemurSummaryParams"
+      responses:
+        "200":
+          description: LeMUR summary response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LemurSummaryResponse"
+          links:
+            PurgeLemurRequestDataById:
+              $ref: "#/components/links/PurgeLemurRequestDataById"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /lemur/v3/generate/question-answer:
+    post:
+      tags:
+        - LeMUR
+      summary: Ask questions using LeMUR
+      description: |
+        Question & Answer allows you to ask free-form questions about a single transcript or a group of transcripts.
+        The questions can be any whose answers you find useful, such as judging whether a caller is likely to become a customer or whether all items on a meeting's agenda were covered.
+      operationId: lemurQuestionAnswer
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: questionAnswer
+      x-fern-request-name: LemurQuestionAnswerParams
+      requestBody:
+        description: Params to ask questions about the transcripts
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LemurQuestionAnswerParams"
+      responses:
+        "200":
+          description: LeMUR question & answer response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LemurQuestionAnswerResponse"
+          links:
+            PurgeLemurRequestDataById:
+              $ref: "#/components/links/PurgeLemurRequestDataById"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /lemur/v3/generate/action-items:
+    post:
+      tags:
+        - LeMUR
+      summary: Extract action items
+      operationId: lemurActionItems
+      x-label: Extract action items using LeMUR
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: actionItems
+      x-fern-request-name: LemurActionItemsParams
+      description: Use LeMUR to generate a list of action items from a transcript
+      requestBody:
+        description: Params to generate action items from transcripts
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LemurActionItemsParams"
+      responses:
+        "200":
+          description: LeMUR action items response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LemurActionItemsResponse"
+          links:
+            PurgeLemurRequestDataById:
+              $ref: "#/components/links/PurgeLemurRequestDataById"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
+
+  /lemur/v3/{request_id}:
+    delete:
+      tags:
+        - LeMUR
+      summary: Purge LeMUR request data
+      description: |
+        Delete the data for a previously submitted LeMUR request.
+        The LLM response data, as well as any context provided in the original request will be removed.
+      operationId: purgeLemurRequestData
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: purgeRequestData
+      x-fern-request-name: PurgeLemurRequestDataParams
+      parameters:
+        - name: request_id
+          x-label: LeMUR request ID
+          in: path
+          description: The ID of the LeMUR request whose data you want to delete. This would be found in the response of the original request.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: LeMUR request data deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PurgeLemurRequestDataResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/GatewayTimeout"
