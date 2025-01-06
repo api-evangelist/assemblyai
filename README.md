@@ -9,16 +9,14 @@ Built by AI experts, AssemblyAI's Speech AI models include accurate speech-to-te
 - **Position:** Consuming 
 - **Access:** 3rd-Party 
 
-## Tags
+## Tags:
 
-- Artificial Intelligence
-- AI
-- Speech
+ - Artificial Intelligence, AI, Speech
 
 ## Timestamps
 
 - **Created:** 2024-06-06 
-- **Modified:** 2024-12-14 
+- **Modified:** 2025-01-05 
 
 ## APIs
 
@@ -26,18 +24,19 @@ Built by AI experts, AssemblyAI's Speech AI models include accurate speech-to-te
 Built by AI experts, AssemblyAI's Speech AI models include accurate speech-to-text for voice data (such as calls, virtual meetings, and podcasts), speaker detection, sentiment analysis, chapter detection, PII redaction, and more.
 
 **Human URL:** [https://www.assemblyai.com/docs/](https://www.assemblyai.com/docs/)
-r
+
 **Base URL:** [https://platform.openai.com/](https://platform.openai.com/)
-r
 
-#### Tags
 
+#### Tags:
+
+ - No Tags
 
 #### Properties
 
 - [Documentation](https://www.assemblyai.com/docs/)
-- [OpenAPI](properties/assemblyai-openapi-original.yml)
-- [AsyncAPI](properties/assemblyai-asyncapi-original.yml)
+- [OpenAPI](openapi/assemblyai-openapi-original.yml)
+- [AsyncAPI](openapi/assemblyai-asyncapi-original.yml)
 
 ## Common Properties
 
