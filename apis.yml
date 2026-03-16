@@ -1,45 +1,64 @@
 aid: assemblyai
-url: https://raw.githubusercontent.com/api-search/ai/main/_apis/assemblyai/apis.md
-apis:
-  - aid: assemblyai:assemblyai-api
-    name: AssemblyAI API
-    tags: []
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-    baseURL: https://platform.openai.com/
-    humanURL: https://www.assemblyai.com/docs/
-    properties:
-      - url: https://www.assemblyai.com/docs/
-        type: Documentation
-      - url: openapi/assemblyai-openapi-original.yml
-        type: OpenAPI
-      - url: openapi/assemblyai-asyncapi-original.yml
-        type: AsyncAPI
-    description: >-
-      Built by AI experts, AssemblyAI's Speech AI models include accurate
-      speech-to-text for voice data (such as calls, virtual meetings, and
-      podcasts), speaker detection, sentiment analysis, chapter detection, PII
-      redaction, and more.
 name: AssemblyAI
-tags:
-  - Artificial Intelligence
-  - AI
-  - Speech
-type: Contract
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
-access: 3rd-Party
-common:
-  - url: https://www.assemblyai.com/docs/
-    type: Getting Started
-created: '2024-06-06T00:00:00.000Z'
-modified: '2025-01-05'
-position: Consuming
 description: >-
   Built by AI experts, AssemblyAI's Speech AI models include accurate
   speech-to-text for voice data (such as calls, virtual meetings, and podcasts),
   speaker detection, sentiment analysis, chapter detection, PII redaction, and
-  more.
+  more. It provides powerful APIs for transcribing and understanding audio data.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Artificial Intelligence
+  - AI
+  - Speech
+  - Transcription
+  - Audio
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/assemblyai/refs/heads/main/apis.yml
+created: '2024-06-06'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: assemblyai:assemblyai-api
+    name: AssemblyAI API
+    description: >-
+      The AssemblyAI API provides speech-to-text transcription, speaker
+      diarization, sentiment analysis, chapter detection, PII redaction, and
+      other audio intelligence capabilities.
+    humanURL: https://www.assemblyai.com/docs/
+    baseURL: https://api.assemblyai.com
+    tags:
+      - Speech to Text
+      - Transcription
+      - Audio Intelligence
+    properties:
+      - type: Documentation
+        url: https://www.assemblyai.com/docs/
+      - type: Getting Started
+        url: https://www.assemblyai.com/docs/getting-started/transcribe-an-audio-file
+      - type: Authentication
+        url: https://www.assemblyai.com/docs/concepts/authentication
+      - type: Reference
+        url: https://www.assemblyai.com/docs/api-reference/overview
+      - type: SDKs
+        url: https://www.assemblyai.com/docs/getting-started/transcribe-an-audio-file
+common:
+  - type: Website
+    url: https://www.assemblyai.com/
+  - type: Documentation
+    url: https://www.assemblyai.com/docs/
+  - type: Blog
+    url: https://www.assemblyai.com/blog
+  - type: Sign Up
+    url: https://www.assemblyai.com/dashboard/signup
+  - type: Login
+    url: https://www.assemblyai.com/dashboard/login
+  - type: Pricing
+    url: https://www.assemblyai.com/pricing
+  - type: GitHub Organization
+    url: https://github.com/AssemblyAI
+  - type: Status
+    url: https://status.assemblyai.com/
 maintainers:
-  - FN: API Evangelist
-    url: http://apievangelist.com
-    email: info@apievangelist.com
-specificationVersion: '0.18'
+  - FN: Kin Lane
+    email: kin@apievangelist.com
