@@ -35,7 +35,7 @@ paths:
     post:
       tags:
         - transcript
-      summary: Upload a media file
+      summary: AssemblyAI Upload a media file
       description: Upload a media file to AssemblyAI's servers.
       operationId: uploadFile
       x-fern-sdk-group-name: files
@@ -70,7 +70,7 @@ paths:
     post:
       tags:
         - transcript
-      summary: Transcribe audio
+      summary: AssemblyAI Transcribe audio
       description: Create a transcript from a media file that is accessible via a URL.
       operationId: createTranscript
       x-fern-sdk-group-name: transcripts
@@ -138,7 +138,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: List transcripts
+      summary: AssemblyAI List transcripts
       x-fern-sdk-group-name: transcripts
       x-fern-sdk-method-name: list
       x-fern-request-name: ListTranscriptParams
@@ -216,7 +216,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: Get transcript
+      summary: AssemblyAI Get transcript
       operationId: getTranscript
       x-fern-sdk-group-name: transcripts
       x-fern-sdk-method-name: get
@@ -270,7 +270,7 @@ paths:
     delete:
       tags:
         - transcript
-      summary: Delete transcript
+      summary: AssemblyAI Delete transcript
       description: |
         Delete the transcript.
         Deleting does not delete the resource itself, but removes the data from the resource and marks it as deleted.
@@ -311,7 +311,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: Get subtitles for transcript
+      summary: AssemblyAI Get subtitles for transcript
       description: Export your transcript in SRT or VTT format to use with a video player for subtitles and closed captions.
       operationId: getSubtitles
       x-fern-sdk-group-name: transcripts
@@ -373,7 +373,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: Get sentences in transcript
+      summary: AssemblyAI Get sentences in transcript
       operationId: getTranscriptSentences
       x-fern-sdk-group-name: transcripts
       x-fern-sdk-method-name: getSentences
@@ -413,7 +413,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: Get paragraphs in transcript
+      summary: AssemblyAI Get paragraphs in transcript
       operationId: getTranscriptParagraphs
       x-fern-sdk-group-name: transcripts
       x-fern-sdk-method-name: getParagraphs
@@ -453,7 +453,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: Search words in transcript
+      summary: AssemblyAI Search words in transcript
       description: Search through the transcript for keywords. You can search for individual words, numbers, or phrases containing up to five words or numbers.
       operationId: wordSearch
       x-fern-sdk-group-name: transcripts
@@ -506,7 +506,7 @@ paths:
     get:
       tags:
         - transcript
-      summary: Get redacted audio
+      summary: AssemblyAI Get redacted audio
       description: Retrieve the redacted audio object containing the status and URL to the redacted audio.
       operationId: getRedactedAudio
       x-fern-sdk-group-name: transcripts
@@ -547,7 +547,7 @@ paths:
     post:
       tags:
         - streaming
-      summary: Create temporary authentication token for Streaming STT
+      summary: AssemblyAI Create temporary authentication token for Streaming STT
       description: Create a temporary authentication token for Streaming Speech-to-Text
       operationId: createTemporaryToken
       x-fern-sdk-group-name: realtime
@@ -586,7 +586,7 @@ paths:
     post:
       tags:
         - LeMUR
-      summary: Run a task using LeMUR
+      summary: AssemblyAI Run a task using LeMUR
       description: Use the LeMUR task endpoint to input your own LLM prompt.
       operationId: lemurTask
       x-fern-sdk-group-name: lemur
@@ -628,7 +628,7 @@ paths:
     post:
       tags:
         - LeMUR
-      summary: Summarize a transcript using LeMUR
+      summary: AssemblyAI Summarize a transcript using LeMUR
       description: |
         Custom Summary allows you to distill a piece of audio into a few impactful sentences.
         You can give the model context to obtain more targeted results while outputting the results in a variety of formats described in human language.
@@ -672,7 +672,7 @@ paths:
     post:
       tags:
         - LeMUR
-      summary: Ask questions using LeMUR
+      summary: AssemblyAI Ask questions using LeMUR
       description: |
         Question & Answer allows you to ask free-form questions about a single transcript or a group of transcripts.
         The questions can be any whose answers you find useful, such as judging whether a caller is likely to become a customer or whether all items on a meeting's agenda were covered.
@@ -716,7 +716,7 @@ paths:
     post:
       tags:
         - LeMUR
-      summary: Extract action items
+      summary: AssemblyAI Extract action items
       operationId: lemurActionItems
       x-label: Extract action items using LeMUR
       x-fern-sdk-group-name: lemur
@@ -759,7 +759,7 @@ paths:
     delete:
       tags:
         - LeMUR
-      summary: Purge LeMUR request data
+      summary: AssemblyAI Purge LeMUR request data
       description: |
         Delete the data for a previously submitted LeMUR request.
         The LLM response data, as well as any context provided in the original request will be removed.
