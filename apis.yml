@@ -8,11 +8,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Artificial Intelligence
   - AI
+  - Artificial Intelligence
+  - Audio
   - Speech
   - Transcription
-  - Audio
 url: >-
   https://raw.githubusercontent.com/api-evangelist/assemblyai/refs/heads/main/apis.yml
 created: '2024-06-06'
@@ -28,9 +28,9 @@ apis:
     humanURL: https://www.assemblyai.com/docs/
     baseURL: https://api.assemblyai.com
     tags:
+      - Audio Intelligence
       - Speech to Text
       - Transcription
-      - Audio Intelligence
     properties:
       - type: Documentation
         url: https://www.assemblyai.com/docs/

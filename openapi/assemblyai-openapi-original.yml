@@ -14,19 +14,19 @@ servers:
     description: AssemblyAI API
 
 tags:
-  - name: transcript
-    description: Transcript related operations
-    externalDocs:
-      url: https://www.assemblyai.com/docs/guides/transcribing-an-audio-file
   - name: LeMUR
     description: LeMUR related operations
     externalDocs:
       url: https://www.assemblyai.com/docs/guides/processing-audio-with-llms-using-lemur
-  - name: streaming
+  - name: Streaming
     description: Streaming Speech-to-Text
     externalDocs:
       url: https://www.assemblyai.com/docs/speech-to-text/streaming
 
+  - name: Transcript
+    description: Transcript related operations
+    externalDocs:
+      url: https://www.assemblyai.com/docs/guides/transcribing-an-audio-file
 security:
   - ApiKey: []
 
@@ -34,7 +34,7 @@ paths:
   /v2/upload:
     post:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Upload a media file
       description: Upload a media file to AssemblyAI's servers.
       operationId: uploadFile
@@ -69,7 +69,7 @@ paths:
   /v2/transcript:
     post:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Transcribe audio
       description: Create a transcript from a media file that is accessible via a URL.
       operationId: createTranscript
@@ -137,7 +137,7 @@ paths:
 
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI List transcripts
       x-fern-sdk-group-name: transcripts
       x-fern-sdk-method-name: list
@@ -215,7 +215,7 @@ paths:
   /v2/transcript/{transcript_id}:
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Get transcript
       operationId: getTranscript
       x-fern-sdk-group-name: transcripts
@@ -269,7 +269,7 @@ paths:
 
     delete:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Delete transcript
       description: |
         Delete the transcript.
@@ -310,7 +310,7 @@ paths:
   /v2/transcript/{transcript_id}/{subtitle_format}:
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Get subtitles for transcript
       description: Export your transcript in SRT or VTT format to use with a video player for subtitles and closed captions.
       operationId: getSubtitles
@@ -372,7 +372,7 @@ paths:
   /v2/transcript/{transcript_id}/sentences:
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Get sentences in transcript
       operationId: getTranscriptSentences
       x-fern-sdk-group-name: transcripts
@@ -412,7 +412,7 @@ paths:
   /v2/transcript/{transcript_id}/paragraphs:
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Get paragraphs in transcript
       operationId: getTranscriptParagraphs
       x-fern-sdk-group-name: transcripts
@@ -452,7 +452,7 @@ paths:
   /v2/transcript/{transcript_id}/word-search:
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Search words in transcript
       description: Search through the transcript for keywords. You can search for individual words, numbers, or phrases containing up to five words or numbers.
       operationId: wordSearch
@@ -505,7 +505,7 @@ paths:
   /v2/transcript/{transcript_id}/redacted-audio:
     get:
       tags:
-        - transcript
+        - Transcript
       summary: AssemblyAI Get redacted audio
       description: Retrieve the redacted audio object containing the status and URL to the redacted audio.
       operationId: getRedactedAudio
@@ -546,7 +546,7 @@ paths:
   /v2/realtime/token:
     post:
       tags:
-        - streaming
+        - Streaming
       summary: AssemblyAI Create temporary authentication token for Streaming STT
       description: Create a temporary authentication token for Streaming Speech-to-Text
       operationId: createTemporaryToken
