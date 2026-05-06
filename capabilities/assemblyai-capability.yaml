@@ -1,0 +1,720 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AssemblyAI API
+  description: AssemblyAI API
+  tags:
+  - Assemblyai
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API HTTP API.
+    resources:
+    - name: v2-upload
+      path: /v2/upload
+      operations:
+      - name: uploadfile
+        method: POST
+        description: AssemblyAI Upload a media file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: AssemblyAI Transcribe audio
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: listtranscripts
+        method: GET
+        description: AssemblyAI List transcripts
+        inputParameters:
+        - name: limit
+          in: query
+          type: string
+          description: Maximum amount of transcripts to retrieve
+        - name: status
+          in: query
+          type: string
+          description: Filter by transcript status
+        - name: created_on
+          in: query
+          type: string
+          description: Only get transcripts created on this date
+        - name: before_id
+          in: query
+          type: string
+          description: Get transcripts that were created before this transcript ID
+        - name: after_id
+          in: query
+          type: string
+          description: Get transcripts that were created after this transcript ID
+        - name: throttled_only
+          in: query
+          type: string
+          description: Only get throttled transcripts, overrides the status filter
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: AssemblyAI Get transcript
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletetranscript
+        method: DELETE
+        description: AssemblyAI Delete transcript
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript-transcript-id-subtitle-format
+      path: /v2/transcript/{transcript_id}/{subtitle_format}
+      operations:
+      - name: getsubtitles
+        method: GET
+        description: AssemblyAI Get subtitles for transcript
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        - name: subtitle_format
+          in: path
+          type: string
+          required: true
+          description: The format of the captions
+        - name: chars_per_caption
+          in: query
+          type: integer
+          description: The maximum number of characters per caption
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript-transcript-id-sentences
+      path: /v2/transcript/{transcript_id}/sentences
+      operations:
+      - name: gettranscriptsentences
+        method: GET
+        description: AssemblyAI Get sentences in transcript
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript-transcript-id-paragraphs
+      path: /v2/transcript/{transcript_id}/paragraphs
+      operations:
+      - name: gettranscriptparagraphs
+        method: GET
+        description: AssemblyAI Get paragraphs in transcript
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript-transcript-id-word-search
+      path: /v2/transcript/{transcript_id}/word-search
+      operations:
+      - name: wordsearch
+        method: GET
+        description: AssemblyAI Search words in transcript
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        - name: words
+          in: query
+          type: array
+          required: true
+          description: Keywords to search for
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-transcript-transcript-id-redacted-audio
+      path: /v2/transcript/{transcript_id}/redacted-audio
+      operations:
+      - name: getredactedaudio
+        method: GET
+        description: AssemblyAI Get redacted audio
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          required: true
+          description: ID of the transcript
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-realtime-token
+      path: /v2/realtime/token
+      operations:
+      - name: createtemporarytoken
+        method: POST
+        description: AssemblyAI Create temporary authentication token for Streaming STT
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lemur-v3-generate-task
+      path: /lemur/v3/generate/task
+      operations:
+      - name: lemurtask
+        method: POST
+        description: AssemblyAI Run a task using LeMUR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lemur-v3-generate-summary
+      path: /lemur/v3/generate/summary
+      operations:
+      - name: lemursummary
+        method: POST
+        description: AssemblyAI Summarize a transcript using LeMUR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lemur-v3-generate-question-answer
+      path: /lemur/v3/generate/question-answer
+      operations:
+      - name: lemurquestionanswer
+        method: POST
+        description: AssemblyAI Ask questions using LeMUR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lemur-v3-generate-action-items
+      path: /lemur/v3/generate/action-items
+      operations:
+      - name: lemuractionitems
+        method: POST
+        description: AssemblyAI Extract action items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: lemur-v3-request-id
+      path: /lemur/v3/{request_id}
+      operations:
+      - name: purgelemurrequestdata
+        method: DELETE
+        description: AssemblyAI Purge LeMUR request data
+        inputParameters:
+        - name: request_id
+          in: path
+          type: string
+          required: true
+          description: The ID of the LeMUR request whose data you want to delete. This would be found in the response of the
+            original request.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: assemblyai-rest
+    description: REST adapter for AssemblyAI API.
+    resources:
+    - path: /v2/upload
+      name: uploadfile
+      operations:
+      - method: POST
+        name: uploadfile
+        description: AssemblyAI Upload a media file
+        call: assemblyai.uploadfile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript
+      name: createtranscript
+      operations:
+      - method: POST
+        name: createtranscript
+        description: AssemblyAI Transcribe audio
+        call: assemblyai.createtranscript
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript
+      name: listtranscripts
+      operations:
+      - method: GET
+        name: listtranscripts
+        description: AssemblyAI List transcripts
+        call: assemblyai.listtranscripts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}
+      name: gettranscript
+      operations:
+      - method: GET
+        name: gettranscript
+        description: AssemblyAI Get transcript
+        call: assemblyai.gettranscript
+        with:
+          transcript_id: rest.transcript_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}
+      name: deletetranscript
+      operations:
+      - method: DELETE
+        name: deletetranscript
+        description: AssemblyAI Delete transcript
+        call: assemblyai.deletetranscript
+        with:
+          transcript_id: rest.transcript_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}/{subtitle_format}
+      name: getsubtitles
+      operations:
+      - method: GET
+        name: getsubtitles
+        description: AssemblyAI Get subtitles for transcript
+        call: assemblyai.getsubtitles
+        with:
+          transcript_id: rest.transcript_id
+          subtitle_format: rest.subtitle_format
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}/sentences
+      name: gettranscriptsentences
+      operations:
+      - method: GET
+        name: gettranscriptsentences
+        description: AssemblyAI Get sentences in transcript
+        call: assemblyai.gettranscriptsentences
+        with:
+          transcript_id: rest.transcript_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}/paragraphs
+      name: gettranscriptparagraphs
+      operations:
+      - method: GET
+        name: gettranscriptparagraphs
+        description: AssemblyAI Get paragraphs in transcript
+        call: assemblyai.gettranscriptparagraphs
+        with:
+          transcript_id: rest.transcript_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}/word-search
+      name: wordsearch
+      operations:
+      - method: GET
+        name: wordsearch
+        description: AssemblyAI Search words in transcript
+        call: assemblyai.wordsearch
+        with:
+          transcript_id: rest.transcript_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/transcript/{transcript_id}/redacted-audio
+      name: getredactedaudio
+      operations:
+      - method: GET
+        name: getredactedaudio
+        description: AssemblyAI Get redacted audio
+        call: assemblyai.getredactedaudio
+        with:
+          transcript_id: rest.transcript_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v2/realtime/token
+      name: createtemporarytoken
+      operations:
+      - method: POST
+        name: createtemporarytoken
+        description: AssemblyAI Create temporary authentication token for Streaming STT
+        call: assemblyai.createtemporarytoken
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /lemur/v3/generate/task
+      name: lemurtask
+      operations:
+      - method: POST
+        name: lemurtask
+        description: AssemblyAI Run a task using LeMUR
+        call: assemblyai.lemurtask
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /lemur/v3/generate/summary
+      name: lemursummary
+      operations:
+      - method: POST
+        name: lemursummary
+        description: AssemblyAI Summarize a transcript using LeMUR
+        call: assemblyai.lemursummary
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /lemur/v3/generate/question-answer
+      name: lemurquestionanswer
+      operations:
+      - method: POST
+        name: lemurquestionanswer
+        description: AssemblyAI Ask questions using LeMUR
+        call: assemblyai.lemurquestionanswer
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /lemur/v3/generate/action-items
+      name: lemuractionitems
+      operations:
+      - method: POST
+        name: lemuractionitems
+        description: AssemblyAI Extract action items
+        call: assemblyai.lemuractionitems
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /lemur/v3/{request_id}
+      name: purgelemurrequestdata
+      operations:
+      - method: DELETE
+        name: purgelemurrequestdata
+        description: AssemblyAI Purge LeMUR request data
+        call: assemblyai.purgelemurrequestdata
+        with:
+          request_id: rest.request_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: assemblyai-mcp
+    transport: http
+    description: MCP adapter for AssemblyAI API for AI agent use.
+    tools:
+    - name: uploadfile
+      description: AssemblyAI Upload a media file
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.uploadfile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createtranscript
+      description: AssemblyAI Transcribe audio
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.createtranscript
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listtranscripts
+      description: AssemblyAI List transcripts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.listtranscripts
+      with:
+        limit: tools.limit
+        status: tools.status
+        created_on: tools.created_on
+        before_id: tools.before_id
+        after_id: tools.after_id
+        throttled_only: tools.throttled_only
+      inputParameters:
+      - name: limit
+        type: string
+        description: Maximum amount of transcripts to retrieve
+      - name: status
+        type: string
+        description: Filter by transcript status
+      - name: created_on
+        type: string
+        description: Only get transcripts created on this date
+      - name: before_id
+        type: string
+        description: Get transcripts that were created before this transcript ID
+      - name: after_id
+        type: string
+        description: Get transcripts that were created after this transcript ID
+      - name: throttled_only
+        type: string
+        description: Only get throttled transcripts, overrides the status filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettranscript
+      description: AssemblyAI Get transcript
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.gettranscript
+      with:
+        transcript_id: tools.transcript_id
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletetranscript
+      description: AssemblyAI Delete transcript
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: assemblyai.deletetranscript
+      with:
+        transcript_id: tools.transcript_id
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getsubtitles
+      description: AssemblyAI Get subtitles for transcript
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.getsubtitles
+      with:
+        transcript_id: tools.transcript_id
+        subtitle_format: tools.subtitle_format
+        chars_per_caption: tools.chars_per_caption
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      - name: subtitle_format
+        type: string
+        description: The format of the captions
+        required: true
+      - name: chars_per_caption
+        type: integer
+        description: The maximum number of characters per caption
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettranscriptsentences
+      description: AssemblyAI Get sentences in transcript
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.gettranscriptsentences
+      with:
+        transcript_id: tools.transcript_id
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettranscriptparagraphs
+      description: AssemblyAI Get paragraphs in transcript
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.gettranscriptparagraphs
+      with:
+        transcript_id: tools.transcript_id
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: wordsearch
+      description: AssemblyAI Search words in transcript
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.wordsearch
+      with:
+        transcript_id: tools.transcript_id
+        words: tools.words
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      - name: words
+        type: array
+        description: Keywords to search for
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getredactedaudio
+      description: AssemblyAI Get redacted audio
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: assemblyai.getredactedaudio
+      with:
+        transcript_id: tools.transcript_id
+      inputParameters:
+      - name: transcript_id
+        type: string
+        description: ID of the transcript
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createtemporarytoken
+      description: AssemblyAI Create temporary authentication token for Streaming STT
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.createtemporarytoken
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lemurtask
+      description: AssemblyAI Run a task using LeMUR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.lemurtask
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lemursummary
+      description: AssemblyAI Summarize a transcript using LeMUR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.lemursummary
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lemurquestionanswer
+      description: AssemblyAI Ask questions using LeMUR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.lemurquestionanswer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lemuractionitems
+      description: AssemblyAI Extract action items
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai.lemuractionitems
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: purgelemurrequestdata
+      description: AssemblyAI Purge LeMUR request data
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: assemblyai.purgelemurrequestdata
+      with:
+        request_id: tools.request_id
+      inputParameters:
+      - name: request_id
+        type: string
+        description: The ID of the LeMUR request whose data you want to delete. This would be found in the response of the
+          original request.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
