@@ -22,7 +22,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/assemblyai/refs/heads/main/apis.yml
 created: '2024-06-06'
-modified: '2026-04-19'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - aid: assemblyai:assemblyai-api
@@ -141,6 +141,9 @@ common:
         description: >-
           Official Node.js SDK for AssemblyAI available on npm
           (@assemblyai/sdk) for JavaScript and TypeScript applications.
+  - name: Agent Skills
+    url: https://github.com/AssemblyAI/assemblyai-skill
+    type: AgentSkill
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
