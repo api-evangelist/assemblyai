@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AssemblyAI API — Streaming
+  description: 'AssemblyAI API — Streaming. 1 operations. Lead operation: AssemblyAI Create temporary authentication token
+    for Streaming STT. Self-contained Naftiko capability covering one Assemblyai business surface.'
+  tags:
+  - Assemblyai
+  - Streaming
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai-streaming
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API — Streaming business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-realtime-token
+      path: /v2/realtime/token
+      operations:
+      - name: createtemporarytoken
+        method: POST
+        description: AssemblyAI Create temporary authentication token for Streaming STT
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: assemblyai-streaming-rest
+    port: 8080
+    description: REST adapter for AssemblyAI API — Streaming. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v2/realtime/token
+      name: v2-realtime-token
+      description: REST surface for v2-realtime-token.
+      operations:
+      - method: POST
+        name: createtemporarytoken
+        description: AssemblyAI Create temporary authentication token for Streaming STT
+        call: assemblyai-streaming.createtemporarytoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: assemblyai-streaming-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AssemblyAI API — Streaming. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: assemblyai-create-temporary-authentication-token
+      description: AssemblyAI Create temporary authentication token for Streaming STT
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai-streaming.createtemporarytoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

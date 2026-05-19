@@ -1,0 +1,246 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AssemblyAI API — LeMUR
+  description: 'AssemblyAI API — LeMUR. 5 operations. Lead operation: AssemblyAI Extract action items. Self-contained Naftiko
+    capability covering one Assemblyai business surface.'
+  tags:
+  - Assemblyai
+  - LeMUR
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai-lemur
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API — LeMUR business capability. Self-contained, no shared references.
+    resources:
+    - name: lemur-v3-generate-action-items
+      path: /lemur/v3/generate/action-items
+      operations:
+      - name: lemuractionitems
+        method: POST
+        description: AssemblyAI Extract action items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: lemur-v3-generate-question-answer
+      path: /lemur/v3/generate/question-answer
+      operations:
+      - name: lemurquestionanswer
+        method: POST
+        description: AssemblyAI Ask questions using LeMUR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: lemur-v3-generate-summary
+      path: /lemur/v3/generate/summary
+      operations:
+      - name: lemursummary
+        method: POST
+        description: AssemblyAI Summarize a transcript using LeMUR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: lemur-v3-generate-task
+      path: /lemur/v3/generate/task
+      operations:
+      - name: lemurtask
+        method: POST
+        description: AssemblyAI Run a task using LeMUR
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: lemur-v3-request_id
+      path: /lemur/v3/{request_id}
+      operations:
+      - name: purgelemurrequestdata
+        method: DELETE
+        description: AssemblyAI Purge LeMUR request data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: request_id
+          in: path
+          type: string
+          description: The ID of the LeMUR request whose data you want to delete. This would be found in the response of the
+            original request.
+          required: true
+  exposes:
+  - type: rest
+    namespace: assemblyai-lemur-rest
+    port: 8080
+    description: REST adapter for AssemblyAI API — LeMUR. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/lemur/v3/generate/action-items
+      name: lemur-v3-generate-action-items
+      description: REST surface for lemur-v3-generate-action-items.
+      operations:
+      - method: POST
+        name: lemuractionitems
+        description: AssemblyAI Extract action items
+        call: assemblyai-lemur.lemuractionitems
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lemur/v3/generate/question-answer
+      name: lemur-v3-generate-question-answer
+      description: REST surface for lemur-v3-generate-question-answer.
+      operations:
+      - method: POST
+        name: lemurquestionanswer
+        description: AssemblyAI Ask questions using LeMUR
+        call: assemblyai-lemur.lemurquestionanswer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lemur/v3/generate/summary
+      name: lemur-v3-generate-summary
+      description: REST surface for lemur-v3-generate-summary.
+      operations:
+      - method: POST
+        name: lemursummary
+        description: AssemblyAI Summarize a transcript using LeMUR
+        call: assemblyai-lemur.lemursummary
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lemur/v3/generate/task
+      name: lemur-v3-generate-task
+      description: REST surface for lemur-v3-generate-task.
+      operations:
+      - method: POST
+        name: lemurtask
+        description: AssemblyAI Run a task using LeMUR
+        call: assemblyai-lemur.lemurtask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/lemur/v3/{request-id}
+      name: lemur-v3-request-id
+      description: REST surface for lemur-v3-request_id.
+      operations:
+      - method: DELETE
+        name: purgelemurrequestdata
+        description: AssemblyAI Purge LeMUR request data
+        call: assemblyai-lemur.purgelemurrequestdata
+        with:
+          request_id: rest.request_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: assemblyai-lemur-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AssemblyAI API — LeMUR. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: assemblyai-extract-action-items
+      description: AssemblyAI Extract action items
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai-lemur.lemuractionitems
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assemblyai-ask-questions-using-lemur
+      description: AssemblyAI Ask questions using LeMUR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai-lemur.lemurquestionanswer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assemblyai-summarize-transcript-using-lemur
+      description: AssemblyAI Summarize a transcript using LeMUR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai-lemur.lemursummary
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assemblyai-run-task-using-lemur
+      description: AssemblyAI Run a task using LeMUR
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: assemblyai-lemur.lemurtask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assemblyai-purge-lemur-request-data
+      description: AssemblyAI Purge LeMUR request data
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: assemblyai-lemur.purgelemurrequestdata
+      with:
+        request_id: tools.request_id
+      outputParameters:
+      - type: object
+        mapping: $.
