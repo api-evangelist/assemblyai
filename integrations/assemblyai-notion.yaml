@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Push AssemblyAI transcripts into Notion pages
+  description: After AssemblyAI finishes a transcript, render the diarized text plus a LeMUR summary into a new Notion page in a Transcripts database.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Knowledge
+  - notion
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    NOTION_API_KEY: NOTION_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: Fetch the completed transcript text.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+    - name: lemur-v3-generate-summary
+      path: /lemur/v3/generate/summary
+      operations:
+      - name: lemursummary
+        method: POST
+        description: Generate a LeMUR summary of the transcript.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: notion
+    baseUri: https://api.notion.com
+    description: Notion API operations consumed by this integration.
+    resources:
+    - name: v1-pages
+      path: /v1/pages
+      operations:
+      - name: createpage
+        method: POST
+        description: 'Notion API: createPage'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-blocks-block-id-children
+      path: /v1/blocks/{block_id}/children
+      operations:
+      - name: appendblockchildren
+        method: PATCH
+        description: 'Notion API: appendBlockChildren'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: block_id
+          in: path
+          type: string
+          description: Path parameter block_id.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-notion-mcp
+    description: MCP adapter for the assemblyai-notion integration.
+    tools:
+    - name: assemblyai_notion
+      description: Execute the assemblyai notion integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-notion-rest
+    port: 8080
+    description: REST adapter for the assemblyai-notion integration.
+    resources:
+    - path: /assemblyai-notion
+      name: assemblyai-notion
+      description: REST surface for the assemblyai-notion integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-notion integration.
+        call: assemblyai_notion
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

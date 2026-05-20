@@ -1,0 +1,60 @@
+- slug: assemblyai-zoom
+  label: Transcribe Zoom cloud recordings with AssemblyAI
+  partner: zoom
+  category: Meetings
+  use_case: When a Zoom cloud recording finishes, pull the recording URL, submit it to AssemblyAI for transcription with speaker diarization, and store the resulting transcript ID against the meeting.
+- slug: assemblyai-twilio-voice
+  label: Transcribe Twilio Voice call recordings with AssemblyAI
+  partner: twilio-voice
+  category: Voice
+  use_case: For every Twilio Voice call recording, fetch the media URL and submit it to AssemblyAI for transcription with PII redaction and sentiment analysis.
+- slug: assemblyai-google-meet
+  label: Transcribe Google Meet recordings with AssemblyAI
+  partner: google-meet
+  category: Meetings
+  use_case: When a Google Meet recording is exported to Drive, hand the file URL to AssemblyAI for transcription with diarization and chapter detection.
+- slug: assemblyai-notion
+  label: Push AssemblyAI transcripts into Notion pages
+  partner: notion
+  category: Knowledge
+  use_case: After AssemblyAI finishes a transcript, render the diarized text plus a LeMUR summary into a new Notion page in a Transcripts database.
+- slug: assemblyai-slack-dms
+  label: Transcribe Slack Huddle / audio clips with AssemblyAI
+  partner: slack-dms
+  category: Collaboration
+  use_case: When an audio clip is posted in Slack, download the media and submit it to AssemblyAI for transcription, then thread the transcript back as a reply.
+- slug: assemblyai-s3
+  label: Transcribe new audio files dropped into AWS S3 with AssemblyAI
+  partner: s3
+  category: Storage
+  use_case: When a new audio object lands in an S3 bucket, generate a presigned URL and submit it to AssemblyAI for transcription with PII redaction.
+- slug: assemblyai-cloudflare-r2
+  label: Transcribe audio assets stored in Cloudflare R2 with AssemblyAI
+  partner: cloudflare-r2
+  category: Storage
+  use_case: For each audio file in a Cloudflare R2 bucket, sign a public URL and pass it to AssemblyAI for transcription, then write the transcript back to R2.
+- slug: assemblyai-openai
+  label: Summarize AssemblyAI transcripts with OpenAI GPT
+  partner: openai
+  category: LLM
+  use_case: After AssemblyAI returns a transcript, pipe the text into an OpenAI chat completion for an executive summary plus action items.
+- slug: assemblyai-anthropic
+  label: Analyze AssemblyAI transcripts with Anthropic Claude
+  partner: anthropic
+  category: LLM
+  use_case: Pass an AssemblyAI transcript to Claude for thematic analysis, risk surfacing, and customer-intent classification, then store the structured result.
+- slug: assemblyai-hubspot
+  label: Attach AssemblyAI call transcripts to HubSpot deals
+  partner: hubspot
+  category: CRM
+  use_case: When a sales call is transcribed by AssemblyAI, attach the transcript and a LeMUR-generated summary as a HubSpot Call engagement on the associated Deal.
+- slug: assemblyai-gong
+  label: Mirror Gong calls into AssemblyAI for custom audio intelligence
+  partner: gong
+  category: Revenue intelligence
+  use_case: For each Gong call recording, pull the media URL and submit it to AssemblyAI so custom topic detection, sentiment, and LeMUR analysis can run alongside Gong's native pipeline.
+- slug: assemblyai-salesforce
+  label: Log AssemblyAI call transcripts as Salesforce activities
+  partner: salesforce
+  category: CRM
+  use_case: When AssemblyAI transcribes a sales call, create a Salesforce Task on the related Opportunity with the diarized transcript and LeMUR action items in the description.

@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Transcribe Google Meet recordings with AssemblyAI
+  description: When a Google Meet recording is exported to Drive, hand the file URL to AssemblyAI for transcription with diarization and chapter detection.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Meetings
+  - google-meet
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    GOOGLE_MEET_API_KEY: GOOGLE_MEET_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: Submit the Drive media URL to AssemblyAI.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-transcript-transcript-id-paragraphs
+      path: /v2/transcript/{transcript_id}/paragraphs
+      operations:
+      - name: gettranscriptparagraphs
+        method: GET
+        description: Return paragraph-level transcript with timestamps.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+  - type: http
+    namespace: google-meet
+    baseUri: https://meet.googleapis.com
+    description: Google Meet REST API operations consumed by this integration.
+    resources:
+    - name: v2-conferencerecords-name-recordings
+      path: /v2/conferenceRecords/{name}/recordings
+      operations:
+      - name: listrecordings
+        method: GET
+        description: 'Google Meet REST API: listRecordings'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Path parameter name.
+          required: true
+    - name: v2-conferencerecords-name-transcripts
+      path: /v2/conferenceRecords/{name}/transcripts
+      operations:
+      - name: listtranscripts
+        method: GET
+        description: 'Google Meet REST API: listTranscripts'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: Path parameter name.
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-google-meet-mcp
+    description: MCP adapter for the assemblyai-google-meet integration.
+    tools:
+    - name: assemblyai_google_meet
+      description: Execute the assemblyai google meet integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-google-meet-rest
+    port: 8080
+    description: REST adapter for the assemblyai-google-meet integration.
+    resources:
+    - path: /assemblyai-google-meet
+      name: assemblyai-google-meet
+      description: REST surface for the assemblyai-google-meet integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-google-meet integration.
+        call: assemblyai_google_meet
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

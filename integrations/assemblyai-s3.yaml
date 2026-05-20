@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Transcribe new audio files dropped into AWS S3 with AssemblyAI
+  description: When a new audio object lands in an S3 bucket, generate a presigned URL and submit it to AssemblyAI for transcription with PII redaction.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Storage
+  - s3
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    S3_API_KEY: S3_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: Submit the S3 presigned URL to AssemblyAI.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-transcript-transcript-id-redacted-audio
+      path: /v2/transcript/{transcript_id}/redacted-audio
+      operations:
+      - name: getredactedaudio
+        method: GET
+        description: Return the PII-redacted audio for safe re-storage.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+  - type: http
+    namespace: s3
+    baseUri: https://s3.amazonaws.com
+    description: AWS S3 REST API operations consumed by this integration.
+    resources:
+    - name: bucket
+      path: /{bucket}
+      operations:
+      - name: listobjects
+        method: GET
+        description: 'AWS S3 REST API: listObjects'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Path parameter bucket.
+          required: true
+    - name: bucket-key
+      path: /{bucket}/{key}
+      operations:
+      - name: getobject
+        method: GET
+        description: 'AWS S3 REST API: getObject'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: bucket
+          in: path
+          type: string
+          description: Path parameter bucket.
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: Path parameter key.
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-s3-mcp
+    description: MCP adapter for the assemblyai-s3 integration.
+    tools:
+    - name: assemblyai_s3
+      description: Execute the assemblyai s3 integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-s3-rest
+    port: 8080
+    description: REST adapter for the assemblyai-s3 integration.
+    resources:
+    - path: /assemblyai-s3
+      name: assemblyai-s3
+      description: REST surface for the assemblyai-s3 integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-s3 integration.
+        call: assemblyai_s3
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

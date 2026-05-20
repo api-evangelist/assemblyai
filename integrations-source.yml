@@ -1,0 +1,278 @@
+# Curated AssemblyAI integrations grouped by category.
+# Each entry becomes one Naftiko capability YAML in integrations/.
+# Domain = speech-to-text, audio intelligence, LLM-on-audio.
+
+# Meeting / conferencing capture (3)
+- partner: zoom
+  name: Transcribe Zoom cloud recordings with AssemblyAI
+  category: Meetings
+  use_case: When a Zoom cloud recording finishes, pull the recording URL, submit it to AssemblyAI for transcription with speaker diarization, and store the resulting transcript ID against the meeting.
+  partner_baseUri: https://api.zoom.us
+  partner_api: Zoom API
+  provider_ops:
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit an audio URL to AssemblyAI for transcription.
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch a completed AssemblyAI transcript.
+  partner_ops:
+    - method: GET
+      path: /v2/meetings/{meetingId}/recordings
+      name: listRecordings
+    - method: GET
+      path: /v2/users/{userId}/recordings
+      name: listUserRecordings
+
+- partner: twilio-voice
+  name: Transcribe Twilio Voice call recordings with AssemblyAI
+  category: Voice
+  use_case: For every Twilio Voice call recording, fetch the media URL and submit it to AssemblyAI for transcription with PII redaction and sentiment analysis.
+  partner_baseUri: https://api.twilio.com
+  partner_api: Twilio Voice API
+  provider_ops:
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit a Twilio recording URL to AssemblyAI.
+    - method: GET
+      path: /v2/transcript/{transcript_id}/sentences
+      name: getTranscriptSentences
+      description: Return per-sentence transcript breakdown.
+  partner_ops:
+    - method: GET
+      path: /2010-04-01/Accounts/{AccountSid}/Recordings.json
+      name: listRecordings
+    - method: GET
+      path: /2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}.json
+      name: getRecording
+
+- partner: google-meet
+  name: Transcribe Google Meet recordings with AssemblyAI
+  category: Meetings
+  use_case: When a Google Meet recording is exported to Drive, hand the file URL to AssemblyAI for transcription with diarization and chapter detection.
+  partner_baseUri: https://meet.googleapis.com
+  partner_api: Google Meet REST API
+  provider_ops:
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit the Drive media URL to AssemblyAI.
+    - method: GET
+      path: /v2/transcript/{transcript_id}/paragraphs
+      name: getTranscriptParagraphs
+      description: Return paragraph-level transcript with timestamps.
+  partner_ops:
+    - method: GET
+      path: /v2/conferenceRecords/{name}/recordings
+      name: listRecordings
+    - method: GET
+      path: /v2/conferenceRecords/{name}/transcripts
+      name: listTranscripts
+
+# Knowledge / docs (2)
+- partner: notion
+  name: Push AssemblyAI transcripts into Notion pages
+  category: Knowledge
+  use_case: After AssemblyAI finishes a transcript, render the diarized text plus a LeMUR summary into a new Notion page in a Transcripts database.
+  partner_baseUri: https://api.notion.com
+  partner_api: Notion API
+  provider_ops:
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch the completed transcript text.
+    - method: POST
+      path: /lemur/v3/generate/summary
+      name: lemurSummary
+      description: Generate a LeMUR summary of the transcript.
+  partner_ops:
+    - method: POST
+      path: /v1/pages
+      name: createPage
+    - method: PATCH
+      path: /v1/blocks/{block_id}/children
+      name: appendBlockChildren
+
+- partner: slack-dms
+  name: Transcribe Slack Huddle / audio clips with AssemblyAI
+  category: Collaboration
+  use_case: When an audio clip is posted in Slack, download the media and submit it to AssemblyAI for transcription, then thread the transcript back as a reply.
+  partner_baseUri: https://slack.com
+  partner_api: Slack Web API
+  provider_ops:
+    - method: POST
+      path: /v2/upload
+      name: uploadFile
+      description: Upload the Slack-hosted media bytes to AssemblyAI.
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit the uploaded audio for transcription.
+  partner_ops:
+    - method: GET
+      path: /api/files.info
+      name: getFileInfo
+    - method: POST
+      path: /api/chat.postMessage
+      name: postMessage
+
+# Object storage (2)
+- partner: s3
+  name: Transcribe new audio files dropped into AWS S3 with AssemblyAI
+  category: Storage
+  use_case: When a new audio object lands in an S3 bucket, generate a presigned URL and submit it to AssemblyAI for transcription with PII redaction.
+  partner_baseUri: https://s3.amazonaws.com
+  partner_api: AWS S3 REST API
+  provider_ops:
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit the S3 presigned URL to AssemblyAI.
+    - method: GET
+      path: /v2/transcript/{transcript_id}/redacted-audio
+      name: getRedactedAudio
+      description: Return the PII-redacted audio for safe re-storage.
+  partner_ops:
+    - method: GET
+      path: /{bucket}
+      name: listObjects
+    - method: GET
+      path: /{bucket}/{key}
+      name: getObject
+
+- partner: cloudflare-r2
+  name: Transcribe audio assets stored in Cloudflare R2 with AssemblyAI
+  category: Storage
+  use_case: For each audio file in a Cloudflare R2 bucket, sign a public URL and pass it to AssemblyAI for transcription, then write the transcript back to R2.
+  partner_baseUri: https://api.cloudflare.com
+  partner_api: Cloudflare R2 API
+  provider_ops:
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit an R2-signed URL to AssemblyAI.
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch the finished transcript.
+  partner_ops:
+    - method: GET
+      path: /client/v4/accounts/{account_id}/r2/buckets/{bucket_name}/objects
+      name: listObjects
+    - method: PUT
+      path: /client/v4/accounts/{account_id}/r2/buckets/{bucket_name}/objects/{key}
+      name: putObject
+
+# LLM enrichment (2)
+- partner: openai
+  name: Summarize AssemblyAI transcripts with OpenAI GPT
+  category: LLM
+  use_case: After AssemblyAI returns a transcript, pipe the text into an OpenAI chat completion for an executive summary plus action items.
+  partner_baseUri: https://api.openai.com
+  partner_api: OpenAI Chat Completions API
+  provider_ops:
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch the AssemblyAI transcript text.
+    - method: POST
+      path: /lemur/v3/generate/action-items
+      name: lemurActionItems
+      description: Optionally let LeMUR extract action items first.
+  partner_ops:
+    - method: POST
+      path: /v1/chat/completions
+      name: createChatCompletion
+
+- partner: anthropic
+  name: Analyze AssemblyAI transcripts with Anthropic Claude
+  category: LLM
+  use_case: Pass an AssemblyAI transcript to Claude for thematic analysis, risk surfacing, and customer-intent classification, then store the structured result.
+  partner_baseUri: https://api.anthropic.com
+  partner_api: Anthropic Messages API
+  provider_ops:
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch the transcript text.
+    - method: POST
+      path: /lemur/v3/generate/question-answer
+      name: lemurQuestionAnswer
+      description: Optionally use LeMUR for grounded Q&A first.
+  partner_ops:
+    - method: POST
+      path: /v1/messages
+      name: createMessage
+
+# CRM / Sales (3)
+- partner: hubspot
+  name: Attach AssemblyAI call transcripts to HubSpot deals
+  category: CRM
+  use_case: When a sales call is transcribed by AssemblyAI, attach the transcript and a LeMUR-generated summary as a HubSpot Call engagement on the associated Deal.
+  partner_baseUri: https://api.hubapi.com
+  partner_api: HubSpot Engagements API
+  provider_ops:
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch the transcript.
+    - method: POST
+      path: /lemur/v3/generate/summary
+      name: lemurSummary
+      description: Generate a call summary via LeMUR.
+  partner_ops:
+    - method: POST
+      path: /crm/v3/objects/calls
+      name: createCall
+    - method: PUT
+      path: /crm/v3/objects/calls/{callId}/associations/deals/{dealId}/call_to_deal
+      name: associateCallToDeal
+
+- partner: gong
+  name: Mirror Gong calls into AssemblyAI for custom audio intelligence
+  category: Revenue intelligence
+  use_case: For each Gong call recording, pull the media URL and submit it to AssemblyAI so custom topic detection, sentiment, and LeMUR analysis can run alongside Gong's native pipeline.
+  partner_baseUri: https://api.gong.io
+  partner_api: Gong API
+  provider_ops:
+    - method: POST
+      path: /v2/transcript
+      name: createTranscript
+      description: Submit the Gong media URL to AssemblyAI.
+    - method: POST
+      path: /lemur/v3/generate/task
+      name: lemurTask
+      description: Run a custom LeMUR prompt against the transcript.
+  partner_ops:
+    - method: POST
+      path: /v2/calls/extensive
+      name: listCallsExtensive
+    - method: GET
+      path: /v2/calls/{id}
+      name: getCall
+
+- partner: salesforce
+  name: Log AssemblyAI call transcripts as Salesforce activities
+  category: CRM
+  use_case: When AssemblyAI transcribes a sales call, create a Salesforce Task on the related Opportunity with the diarized transcript and LeMUR action items in the description.
+  partner_baseUri: https://yourinstance.my.salesforce.com
+  partner_api: Salesforce REST API
+  provider_ops:
+    - method: GET
+      path: /v2/transcript/{transcript_id}
+      name: getTranscript
+      description: Fetch the completed transcript.
+    - method: POST
+      path: /lemur/v3/generate/action-items
+      name: lemurActionItems
+      description: Extract follow-up action items via LeMUR.
+  partner_ops:
+    - method: POST
+      path: /services/data/v60.0/sobjects/Task
+      name: createTask
+    - method: PATCH
+      path: /services/data/v60.0/sobjects/Task/{id}
+      name: updateTask

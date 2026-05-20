@@ -1,0 +1,139 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Attach AssemblyAI call transcripts to HubSpot deals
+  description: When a sales call is transcribed by AssemblyAI, attach the transcript and a LeMUR-generated summary as a HubSpot Call engagement on the associated Deal.
+  tags:
+  - AssemblyAI
+  - Integration
+  - CRM
+  - hubspot
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    HUBSPOT_API_KEY: HUBSPOT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: Fetch the transcript.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+    - name: lemur-v3-generate-summary
+      path: /lemur/v3/generate/summary
+      operations:
+      - name: lemursummary
+        method: POST
+        description: Generate a call summary via LeMUR.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: hubspot
+    baseUri: https://api.hubapi.com
+    description: HubSpot Engagements API operations consumed by this integration.
+    resources:
+    - name: crm-v3-objects-calls
+      path: /crm/v3/objects/calls
+      operations:
+      - name: createcall
+        method: POST
+        description: 'HubSpot Engagements API: createCall'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: crm-v3-objects-calls-callid-associations-deals-dealid-call-t
+      path: /crm/v3/objects/calls/{callId}/associations/deals/{dealId}/call_to_deal
+      operations:
+      - name: associatecalltodeal
+        method: PUT
+        description: 'HubSpot Engagements API: associateCallToDeal'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: callId
+          in: path
+          type: string
+          description: Path parameter callId.
+          required: true
+        - name: dealId
+          in: path
+          type: string
+          description: Path parameter dealId.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-hubspot-mcp
+    description: MCP adapter for the assemblyai-hubspot integration.
+    tools:
+    - name: assemblyai_hubspot
+      description: Execute the assemblyai hubspot integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-hubspot-rest
+    port: 8080
+    description: REST adapter for the assemblyai-hubspot integration.
+    resources:
+    - path: /assemblyai-hubspot
+      name: assemblyai-hubspot
+      description: REST surface for the assemblyai-hubspot integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-hubspot integration.
+        call: assemblyai_hubspot
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

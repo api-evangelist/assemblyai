@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Transcribe Slack Huddle / audio clips with AssemblyAI
+  description: When an audio clip is posted in Slack, download the media and submit it to AssemblyAI for transcription, then thread the transcript back as a reply.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Collaboration
+  - slack-dms
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    SLACK_DMS_API_KEY: SLACK_DMS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-upload
+      path: /v2/upload
+      operations:
+      - name: uploadfile
+        method: POST
+        description: Upload the Slack-hosted media bytes to AssemblyAI.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: Submit the uploaded audio for transcription.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: slack-dms
+    baseUri: https://slack.com
+    description: Slack Web API operations consumed by this integration.
+    resources:
+    - name: api-files-info
+      path: /api/files.info
+      operations:
+      - name: getfileinfo
+        method: GET
+        description: 'Slack Web API: getFileInfo'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters: []
+    - name: api-chat-postmessage
+      path: /api/chat.postMessage
+      operations:
+      - name: postmessage
+        method: POST
+        description: 'Slack Web API: postMessage'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-slack-dms-mcp
+    description: MCP adapter for the assemblyai-slack-dms integration.
+    tools:
+    - name: assemblyai_slack_dms
+      description: Execute the assemblyai slack dms integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-slack-dms-rest
+    port: 8080
+    description: REST adapter for the assemblyai-slack-dms integration.
+    resources:
+    - path: /assemblyai-slack-dms
+      name: assemblyai-slack-dms
+      description: REST surface for the assemblyai-slack-dms integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-slack-dms integration.
+        call: assemblyai_slack_dms
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

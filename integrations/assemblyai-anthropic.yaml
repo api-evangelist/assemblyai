@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Analyze AssemblyAI transcripts with Anthropic Claude
+  description: Pass an AssemblyAI transcript to Claude for thematic analysis, risk surfacing, and customer-intent classification, then store the structured result.
+  tags:
+  - AssemblyAI
+  - Integration
+  - LLM
+  - anthropic
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    ANTHROPIC_API_KEY: ANTHROPIC_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: Fetch the transcript text.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+    - name: lemur-v3-generate-question-answer
+      path: /lemur/v3/generate/question-answer
+      operations:
+      - name: lemurquestionanswer
+        method: POST
+        description: Optionally use LeMUR for grounded Q&A first.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: anthropic
+    baseUri: https://api.anthropic.com
+    description: Anthropic Messages API operations consumed by this integration.
+    resources:
+    - name: v1-messages
+      path: /v1/messages
+      operations:
+      - name: createmessage
+        method: POST
+        description: 'Anthropic Messages API: createMessage'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-anthropic-mcp
+    description: MCP adapter for the assemblyai-anthropic integration.
+    tools:
+    - name: assemblyai_anthropic
+      description: Execute the assemblyai anthropic integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-anthropic-rest
+    port: 8080
+    description: REST adapter for the assemblyai-anthropic integration.
+    resources:
+    - path: /assemblyai-anthropic
+      name: assemblyai-anthropic
+      description: REST surface for the assemblyai-anthropic integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-anthropic integration.
+        call: assemblyai_anthropic
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

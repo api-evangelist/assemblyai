@@ -1,0 +1,149 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Transcribe audio assets stored in Cloudflare R2 with AssemblyAI
+  description: For each audio file in a Cloudflare R2 bucket, sign a public URL and pass it to AssemblyAI for transcription, then write the transcript back to R2.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Storage
+  - cloudflare-r2
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    CLOUDFLARE_R2_API_KEY: CLOUDFLARE_R2_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: Submit an R2-signed URL to AssemblyAI.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: Fetch the finished transcript.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+  - type: http
+    namespace: cloudflare-r2
+    baseUri: https://api.cloudflare.com
+    description: Cloudflare R2 API operations consumed by this integration.
+    resources:
+    - name: client-v4-accounts-account-id-r2-buckets-bucket-name-objects
+      path: /client/v4/accounts/{account_id}/r2/buckets/{bucket_name}/objects
+      operations:
+      - name: listobjects
+        method: GET
+        description: 'Cloudflare R2 API: listObjects'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: account_id
+          in: path
+          type: string
+          description: Path parameter account_id.
+          required: true
+        - name: bucket_name
+          in: path
+          type: string
+          description: Path parameter bucket_name.
+          required: true
+    - name: client-v4-accounts-account-id-r2-buckets-bucket-name-objects
+      path: /client/v4/accounts/{account_id}/r2/buckets/{bucket_name}/objects/{key}
+      operations:
+      - name: putobject
+        method: PUT
+        description: 'Cloudflare R2 API: putObject'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: account_id
+          in: path
+          type: string
+          description: Path parameter account_id.
+          required: true
+        - name: bucket_name
+          in: path
+          type: string
+          description: Path parameter bucket_name.
+          required: true
+        - name: key
+          in: path
+          type: string
+          description: Path parameter key.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-cloudflare-r2-mcp
+    description: MCP adapter for the assemblyai-cloudflare-r2 integration.
+    tools:
+    - name: assemblyai_cloudflare_r2
+      description: Execute the assemblyai cloudflare r2 integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-cloudflare-r2-rest
+    port: 8080
+    description: REST adapter for the assemblyai-cloudflare-r2 integration.
+    resources:
+    - path: /assemblyai-cloudflare-r2
+      name: assemblyai-cloudflare-r2
+      description: REST surface for the assemblyai-cloudflare-r2 integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-cloudflare-r2 integration.
+        call: assemblyai_cloudflare_r2
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

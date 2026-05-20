@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Summarize AssemblyAI transcripts with OpenAI GPT
+  description: After AssemblyAI returns a transcript, pipe the text into an OpenAI chat completion for an executive summary plus action items.
+  tags:
+  - AssemblyAI
+  - Integration
+  - LLM
+  - openai
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    OPENAI_API_KEY: OPENAI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: Fetch the AssemblyAI transcript text.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+    - name: lemur-v3-generate-action-items
+      path: /lemur/v3/generate/action-items
+      operations:
+      - name: lemuractionitems
+        method: POST
+        description: Optionally let LeMUR extract action items first.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  - type: http
+    namespace: openai
+    baseUri: https://api.openai.com
+    description: OpenAI Chat Completions API operations consumed by this integration.
+    resources:
+    - name: v1-chat-completions
+      path: /v1/chat/completions
+      operations:
+      - name: createchatcompletion
+        method: POST
+        description: 'OpenAI Chat Completions API: createChatCompletion'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-openai-mcp
+    description: MCP adapter for the assemblyai-openai integration.
+    tools:
+    - name: assemblyai_openai
+      description: Execute the assemblyai openai integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-openai-rest
+    port: 8080
+    description: REST adapter for the assemblyai-openai integration.
+    resources:
+    - path: /assemblyai-openai
+      name: assemblyai-openai
+      description: REST surface for the assemblyai-openai integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-openai integration.
+        call: assemblyai_openai
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Transcribe Zoom cloud recordings with AssemblyAI
+  description: When a Zoom cloud recording finishes, pull the recording URL, submit it to AssemblyAI for transcription with speaker diarization, and store the resulting transcript ID against the meeting.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Meetings
+  - zoom
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    ZOOM_API_KEY: ZOOM_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: Submit an audio URL to AssemblyAI for transcription.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-transcript-transcript-id
+      path: /v2/transcript/{transcript_id}
+      operations:
+      - name: gettranscript
+        method: GET
+        description: Fetch a completed AssemblyAI transcript.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+  - type: http
+    namespace: zoom
+    baseUri: https://api.zoom.us
+    description: Zoom API operations consumed by this integration.
+    resources:
+    - name: v2-meetings-meetingid-recordings
+      path: /v2/meetings/{meetingId}/recordings
+      operations:
+      - name: listrecordings
+        method: GET
+        description: 'Zoom API: listRecordings'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: meetingId
+          in: path
+          type: string
+          description: Path parameter meetingId.
+          required: true
+    - name: v2-users-userid-recordings
+      path: /v2/users/{userId}/recordings
+      operations:
+      - name: listuserrecordings
+        method: GET
+        description: 'Zoom API: listUserRecordings'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: Path parameter userId.
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-zoom-mcp
+    description: MCP adapter for the assemblyai-zoom integration.
+    tools:
+    - name: assemblyai_zoom
+      description: Execute the assemblyai zoom integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-zoom-rest
+    port: 8080
+    description: REST adapter for the assemblyai-zoom integration.
+    resources:
+    - path: /assemblyai-zoom
+      name: assemblyai-zoom
+      description: REST surface for the assemblyai-zoom integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-zoom integration.
+        call: assemblyai_zoom
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.

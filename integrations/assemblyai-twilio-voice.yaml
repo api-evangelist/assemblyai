@@ -1,0 +1,134 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Transcribe Twilio Voice call recordings with AssemblyAI
+  description: For every Twilio Voice call recording, fetch the media URL and submit it to AssemblyAI for transcription with PII redaction and sentiment analysis.
+  tags:
+  - AssemblyAI
+  - Integration
+  - Voice
+  - twilio-voice
+  created: '2026-05-20'
+  modified: '2026-05-20'
+binds:
+- namespace: env
+  keys:
+    ASSEMBLYAI_API_KEY: ASSEMBLYAI_API_KEY
+    TWILIO_VOICE_API_KEY: TWILIO_VOICE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: assemblyai
+    baseUri: https://api.assemblyai.com
+    description: AssemblyAI API operations consumed by this integration.
+    resources:
+    - name: v2-transcript
+      path: /v2/transcript
+      operations:
+      - name: createtranscript
+        method: POST
+        description: Submit a Twilio recording URL to AssemblyAI.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-transcript-transcript-id-sentences
+      path: /v2/transcript/{transcript_id}/sentences
+      operations:
+      - name: gettranscriptsentences
+        method: GET
+        description: Return per-sentence transcript breakdown.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transcript_id
+          in: path
+          type: string
+          description: Path parameter transcript_id.
+          required: true
+  - type: http
+    namespace: twilio-voice
+    baseUri: https://api.twilio.com
+    description: Twilio Voice API operations consumed by this integration.
+    resources:
+    - name: 2010-04-01-accounts-accountsid-recordings-json
+      path: /2010-04-01/Accounts/{AccountSid}/Recordings.json
+      operations:
+      - name: listrecordings
+        method: GET
+        description: 'Twilio Voice API: listRecordings'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: AccountSid
+          in: path
+          type: string
+          description: Path parameter AccountSid.
+          required: true
+    - name: 2010-04-01-accounts-accountsid-recordings-recordingsid-json
+      path: /2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}.json
+      operations:
+      - name: getrecording
+        method: GET
+        description: 'Twilio Voice API: getRecording'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: AccountSid
+          in: path
+          type: string
+          description: Path parameter AccountSid.
+          required: true
+        - name: RecordingSid
+          in: path
+          type: string
+          description: Path parameter RecordingSid.
+          required: true
+  exposes:
+  - type: mcp
+    namespace: assemblyai-twilio-voice-mcp
+    description: MCP adapter for the assemblyai-twilio-voice integration.
+    tools:
+    - name: assemblyai_twilio_voice
+      description: Execute the assemblyai twilio voice integration end-to-end.
+      inputSchema:
+        type: object
+        properties:
+          trigger_event:
+            type: object
+            description: Triggering event payload.
+        required:
+        - trigger_event
+  - type: rest
+    namespace: assemblyai-twilio-voice-rest
+    port: 8080
+    description: REST adapter for the assemblyai-twilio-voice integration.
+    resources:
+    - path: /assemblyai-twilio-voice
+      name: assemblyai-twilio-voice
+      description: REST surface for the assemblyai-twilio-voice integration.
+      operations:
+      - method: POST
+        name: trigger
+        description: Trigger the assemblyai-twilio-voice integration.
+        call: assemblyai_twilio_voice
+        with:
+          trigger_event: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
