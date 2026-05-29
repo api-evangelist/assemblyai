@@ -1,0 +1,533 @@
+asyncapi: 2.6.0
+defaultContentType: application/json
+id: https://assemblyai.com/asyncapi/v3
+
+info:
+  title: AssemblyAI Universal Streaming Speech-to-Text API
+  description: |
+    AsyncAPI specification for the AssemblyAI Universal Streaming Speech-to-Text
+    WebSocket API (v3). Clients open a WebSocket to `wss://streaming.assemblyai.com/v3/ws`,
+    send raw binary PCM audio frames, and receive JSON events such as `Begin`,
+    `Turn`, `SpeechStarted`, and `Termination`. Connection-time parameters
+    (sample rate, encoding, speech model, formatting, key terms, PII redaction,
+    LLM gateway, speaker labels) are passed via query string. Session parameters
+    can be updated mid-stream with `UpdateConfiguration`, and endpointing can be
+    forced with `ForceEndpoint`. The client closes the session by sending
+    `Terminate`.
+  version: '3.0.0'
+  contact:
+    name: AssemblyAI Support
+    email: support@assemblyai.com
+    url: https://www.assemblyai.com/docs/
+  license:
+    name: MIT License
+
+servers:
+  production:
+    url: streaming.assemblyai.com
+    protocol: wss
+    description: AssemblyAI hosted Universal Streaming endpoint.
+    security:
+      - ApiKey: []
+      - Token: []
+  selfHosted:
+    url: localhost:8080
+    protocol: ws
+    description: |
+      Self-hosted streaming stack (see `AssemblyAI/streaming-self-hosting-stack`).
+      Replace with the host/port your deployment exposes.
+
+tags:
+  - name: streaming
+    description: Universal Streaming Speech-to-Text (v3).
+    externalDocs:
+      url: https://www.assemblyai.com/docs/speech-to-text/universal-streaming
+
+channels:
+  /v3/ws:
+    description: |
+      Single full-duplex WebSocket channel for a Universal Streaming session.
+      The client publishes binary PCM audio chunks and JSON control messages,
+      and subscribes to JSON event messages emitted by the server.
+    bindings:
+      ws:
+        bindingVersion: 0.1.0
+        headers:
+          type: object
+          properties:
+            Authorization:
+              description: |
+                AssemblyAI API key, a temporary token, or `self-hosted` when
+                running against the self-hosted streaming stack.
+              type: string
+            AssemblyAI-Version:
+              description: API version date pin (e.g. `2025-05-12`).
+              type: string
+        query:
+          type: object
+          properties:
+            sample_rate:
+              description: Sample rate of the streamed audio, in Hz.
+              type: integer
+              examples:
+                - 16000
+            encoding:
+              description: Audio encoding of the binary frames.
+              $ref: '#/components/schemas/Encoding'
+            speech_model:
+              description: Streaming speech model to route to.
+              $ref: '#/components/schemas/SpeechModel'
+            token:
+              description: Temporary session token (alternative to API key header).
+              type: string
+              format: password
+            format_turns:
+              description: Emit formatted (punctuated, cased) turns in addition to raw turns.
+              type: boolean
+              default: false
+            end_of_turn_confidence_threshold:
+              description: Confidence threshold above which end-of-turn is emitted.
+              type: number
+            min_turn_silence:
+              description: Minimum silence (ms) before a confident turn is closed.
+              type: integer
+            max_turn_silence:
+              description: Maximum silence (ms) before a turn is force-closed.
+              type: integer
+            vad_threshold:
+              description: Voice activity detection threshold.
+              type: number
+            keyterms_prompt:
+              description: |
+                JSON-encoded array of key terms to bias the transcription
+                vocabulary (e.g. `["Naftiko","API Evangelist"]`).
+              type: string
+            filter_profanity:
+              description: Replace profanity with asterisks.
+              type: boolean
+            prompt:
+              description: Free-form prompt to bias the model.
+              type: string
+            interruption_delay:
+              description: Delay (ms) before treating new speech as an interruption.
+              type: integer
+            turn_left_pad_ms:
+              description: Left-padding (ms) applied to turn audio.
+              type: integer
+            language_detection:
+              description: Enable automatic language detection per turn.
+              type: boolean
+            domain:
+              description: Vertical-tuned domain model (e.g. `medical-v1`).
+              type: string
+            inactivity_timeout:
+              description: Seconds of inactivity before the server closes the session.
+              type: integer
+            webhook_url:
+              description: HTTPS URL the server posts session-end webhooks to.
+              type: string
+              format: uri
+            webhook_auth_header_name:
+              description: Header name to attach to the webhook request.
+              type: string
+            webhook_auth_header_value:
+              description: Header value to attach to the webhook request.
+              type: string
+            llm_gateway:
+              description: JSON-encoded LLM gateway config (`{model,messages,max_tokens}`).
+              type: string
+            speaker_labels:
+              description: Emit per-word and per-turn speaker labels.
+              type: boolean
+            max_speakers:
+              description: Cap on the number of distinct speakers labeled.
+              type: integer
+            voice_focus:
+              description: Noise-suppression model variant (`near-field` or `far-field`).
+              type: string
+            voice_focus_threshold:
+              description: Noise-suppression threshold (0.0-1.0).
+              type: number
+            continuous_partials:
+              description: Continuously emit partial turns while speech is in progress.
+              type: boolean
+            include_partial_turns:
+              description: Include non-final partial Turn events.
+              type: boolean
+            redact_pii:
+              description: Redact PII entities from emitted transcripts.
+              type: boolean
+            redact_pii_policies:
+              description: JSON-encoded array of PII entity classes to redact.
+              type: string
+            redact_pii_sub:
+              description: PII substitution strategy (`hash` or `entity_name`).
+              type: string
+    publish:
+      description: Messages the client sends to the server.
+      operationId: sendClientMessage
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AudioFrame'
+          - $ref: '#/components/messages/UpdateConfiguration'
+          - $ref: '#/components/messages/ForceEndpoint'
+          - $ref: '#/components/messages/Terminate'
+    subscribe:
+      description: Events the server emits to the client.
+      operationId: receiveServerEvent
+      message:
+        oneOf:
+          - $ref: '#/components/messages/Begin'
+          - $ref: '#/components/messages/Turn'
+          - $ref: '#/components/messages/SpeechStarted'
+          - $ref: '#/components/messages/SpeakerRevision'
+          - $ref: '#/components/messages/LLMGatewayResponse'
+          - $ref: '#/components/messages/Warning'
+          - $ref: '#/components/messages/Error'
+          - $ref: '#/components/messages/Termination'
+
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AssemblyAI API key sent in the `Authorization` header.
+    Token:
+      type: httpApiKey
+      in: query
+      name: token
+      description: Temporary streaming token passed as the `token` query parameter.
+
+  messages:
+    AudioFrame:
+      name: AudioFrame
+      title: Audio Frame
+      summary: A raw binary chunk of PCM audio.
+      description: |
+        Binary WebSocket frame containing raw audio samples in the encoding and
+        sample rate negotiated at connect time (default: 16 kHz 16-bit
+        little-endian mono PCM). Chunks are typically 50-200 ms of audio.
+      contentType: application/octet-stream
+      payload:
+        type: string
+        format: binary
+
+    UpdateConfiguration:
+      name: UpdateConfiguration
+      title: Update Configuration
+      summary: Update session parameters mid-stream.
+      payload:
+        $ref: '#/components/schemas/UpdateConfiguration'
+
+    ForceEndpoint:
+      name: ForceEndpoint
+      title: Force Endpoint
+      summary: Force the current turn to end immediately.
+      payload:
+        $ref: '#/components/schemas/ForceEndpoint'
+
+    Terminate:
+      name: Terminate
+      title: Terminate Session
+      summary: Politely terminate the streaming session.
+      payload:
+        $ref: '#/components/schemas/Terminate'
+
+    Begin:
+      name: Begin
+      title: Session Begin
+      summary: First event sent by the server after the session is established.
+      payload:
+        $ref: '#/components/schemas/BeginEvent'
+
+    Turn:
+      name: Turn
+      title: Turn
+      summary: A streaming transcription turn with word-level timings.
+      payload:
+        $ref: '#/components/schemas/TurnEvent'
+
+    SpeechStarted:
+      name: SpeechStarted
+      title: Speech Started
+      summary: Voice activity detected the start of speech.
+      payload:
+        $ref: '#/components/schemas/SpeechStartedEvent'
+
+    SpeakerRevision:
+      name: SpeakerRevision
+      title: Speaker Revision
+      summary: Offline correction to a previously-emitted Turn's speaker labels.
+      payload:
+        $ref: '#/components/schemas/SpeakerRevisionEvent'
+
+    LLMGatewayResponse:
+      name: LLMGatewayResponse
+      title: LLM Gateway Response
+      summary: Response from the optional in-band LLM gateway.
+      payload:
+        $ref: '#/components/schemas/LLMGatewayResponseEvent'
+
+    Warning:
+      name: Warning
+      title: Warning
+      summary: Non-fatal server warning.
+      payload:
+        $ref: '#/components/schemas/WarningEvent'
+
+    Error:
+      name: Error
+      title: Error
+      summary: Server error event (see `StreamingErrorCodes` for the catalog).
+      payload:
+        $ref: '#/components/schemas/ErrorEvent'
+
+    Termination:
+      name: Termination
+      title: Termination
+      summary: Final event acknowledging session shutdown.
+      payload:
+        $ref: '#/components/schemas/TerminationEvent'
+
+  schemas:
+    Encoding:
+      type: string
+      enum:
+        - pcm_s16le
+        - pcm_mulaw
+      description: Audio encoding for the binary frames.
+
+    SpeechModel:
+      type: string
+      enum:
+        - universal-streaming-english
+        - universal-streaming-multilingual
+        - u3-rt-pro
+        - whisper-rt
+      description: Streaming speech model to use for the session.
+
+    Word:
+      type: object
+      required:
+        - start
+        - end
+        - confidence
+        - text
+        - word_is_final
+      properties:
+        start:
+          type: integer
+          description: Word start time relative to session start, in ms.
+        end:
+          type: integer
+          description: Word end time relative to session start, in ms.
+        confidence:
+          type: number
+          description: Confidence in the recognized word (0.0-1.0).
+        text:
+          type: string
+        word_is_final:
+          type: boolean
+          description: True when this word's text/timing will no longer change.
+        speaker:
+          type: string
+          description: Speaker label (only present when speaker_labels is enabled).
+
+    BeginEvent:
+      type: object
+      required:
+        - type
+        - id
+        - expires_at
+      properties:
+        type:
+          type: string
+          const: Begin
+        id:
+          type: string
+          description: Session identifier.
+        expires_at:
+          type: integer
+          description: Unix timestamp at which the session token expires.
+
+    TurnEvent:
+      type: object
+      required:
+        - type
+        - turn_order
+        - turn_is_formatted
+        - end_of_turn
+        - transcript
+        - end_of_turn_confidence
+        - words
+      properties:
+        type:
+          type: string
+          const: Turn
+        turn_order:
+          type: integer
+          description: Monotonic index of the turn within the session.
+        turn_is_formatted:
+          type: boolean
+          description: True when the transcript is the formatted variant.
+        end_of_turn:
+          type: boolean
+          description: True when the server has finalized the turn.
+        transcript:
+          type: string
+        end_of_turn_confidence:
+          type: number
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/Word'
+        language_code:
+          type: string
+        language_confidence:
+          type: number
+        speaker_label:
+          type: string
+
+    SpeechStartedEvent:
+      type: object
+      required:
+        - type
+        - timestamp
+      properties:
+        type:
+          type: string
+          const: SpeechStarted
+        timestamp:
+          type: integer
+          description: Milliseconds since session start at which speech was detected.
+
+    SpeakerRevisionEvent:
+      type: object
+      required:
+        - type
+        - turn_order
+      properties:
+        type:
+          type: string
+          const: SpeakerRevision
+        turn_order:
+          type: integer
+          description: turn_order of the previously-emitted Turn being revised.
+        speaker_label:
+          type: string
+        words:
+          type: array
+          items:
+            $ref: '#/components/schemas/Word'
+
+    LLMGatewayResponseEvent:
+      type: object
+      required:
+        - type
+        - turn_order
+        - transcript
+      properties:
+        type:
+          type: string
+          const: LLMGatewayResponse
+        turn_order:
+          type: integer
+        transcript:
+          type: string
+        data:
+          description: LLM provider response payload (provider-defined shape).
+
+    WarningEvent:
+      type: object
+      required:
+        - type
+        - warning_code
+        - warning
+      properties:
+        type:
+          type: string
+          const: Warning
+        warning_code:
+          type: integer
+        warning:
+          type: string
+
+    ErrorEvent:
+      type: object
+      required:
+        - type
+        - error
+      properties:
+        type:
+          type: string
+          const: Error
+        error_code:
+          type: integer
+          description: |
+            Numeric code from the streaming error catalog (e.g. 4001 Not
+            Authorized, 4031 Session idle, 4101 Invalid schema).
+        error:
+          type: string
+
+    TerminationEvent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: Termination
+        audio_duration_seconds:
+          type: integer
+        session_duration_seconds:
+          type: integer
+
+    Terminate:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: Terminate
+
+    ForceEndpoint:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: ForceEndpoint
+
+    UpdateConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          const: UpdateConfiguration
+        end_of_turn_confidence_threshold:
+          type: number
+        min_turn_silence:
+          type: integer
+        max_turn_silence:
+          type: integer
+        vad_threshold:
+          type: number
+        format_turns:
+          type: boolean
+        keyterms_prompt:
+          type: array
+          items:
+            type: string
+        filter_profanity:
+          type: boolean
+        prompt:
+          type: string
+        interruption_delay:
+          type: integer
+        turn_left_pad_ms:
+          type: integer

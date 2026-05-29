@@ -42,6 +42,8 @@ apis:
     url: openapi/assemblyai-openapi-original.yml
   - type: AsyncAPI
     url: openapi/assemblyai-asyncapi-original.yml
+  - type: AsyncAPI
+    url: asyncapi/assemblyai-asyncapi.yml
   - type: NaftikoCapability
     url: capabilities/assemblyai-lemur.yaml
   - type: NaftikoCapability
