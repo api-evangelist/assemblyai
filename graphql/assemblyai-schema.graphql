@@ -1,0 +1,773 @@
+"""
+AssemblyAI GraphQL Schema
+Conceptual schema derived from the AssemblyAI REST API.
+Covers async transcription, real-time streaming tokens, audio intelligence, and LeMUR.
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# ─── Enums ───────────────────────────────────────────────────────────────────
+
+"""Processing status of an async transcript."""
+enum TranscriptStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  ERROR
+}
+
+"""Format for exported subtitle/caption files."""
+enum SubtitleFormat {
+  SRT
+  VTT
+}
+
+"""Sentiment detected for a segment of speech."""
+enum SentimentType {
+  POSITIVE
+  NEGATIVE
+  NEUTRAL
+}
+
+"""Speaker label assigned during diarization."""
+enum SpeakerLabel {
+  A
+  B
+  C
+  D
+  E
+  F
+  G
+  H
+  I
+  J
+}
+
+"""Available language codes for transcription."""
+enum LanguageCode {
+  EN
+  EN_AU
+  EN_UK
+  EN_US
+  ES
+  FR
+  DE
+  IT
+  PT
+  NL
+  HI
+  JA
+  ZH
+  FI
+  KO
+  PL
+  RU
+  TR
+  UK
+  VI
+}
+
+"""Speech model to use for transcription."""
+enum SpeechModel {
+  BEST
+  NANO
+}
+
+"""Entity type detected in the transcript."""
+enum EntityType {
+  BLOOD_TYPE
+  CREDIT_CARD_CVV
+  CREDIT_CARD_EXPIRATION
+  CREDIT_CARD_NUMBER
+  DATE
+  DATE_INTERVAL
+  DATE_OF_BIRTH
+  DRIVERS_LICENSE
+  DRUG
+  DURATION
+  EMAIL_ADDRESS
+  EVENT
+  FILENAME
+  GENDER_SEXUALITY
+  HEALTHCARE_NUMBER
+  INJURY
+  IP_ADDRESS
+  LANGUAGE
+  LOCATION
+  MEDICAL_CONDITION
+  MEDICAL_PROCESS
+  MONEY_AMOUNT
+  NATIONALITY
+  NUMBER_SEQUENCE
+  OCCUPATION
+  ORGANIZATION
+  PASSPORT_NUMBER
+  PASSWORD
+  PERSON_AGE
+  PERSON_NAME
+  PHONE_NUMBER
+  POLITICAL_AFFILIATION
+  RELIGION
+  TIME
+  URL
+  USERNAME
+  VEHICLE_ID
+  ZODIAC_SIGN
+  BANKING_INFORMATION
+  ID_NUMBER
+}
+
+"""PII policy type for redaction."""
+enum PiiPolicy {
+  BLOOD_TYPE
+  CREDIT_CARD_CVV
+  CREDIT_CARD_EXPIRATION
+  CREDIT_CARD_NUMBER
+  DATE
+  DATE_OF_BIRTH
+  DRIVERS_LICENSE
+  DRUG
+  EMAIL_ADDRESS
+  EVENT
+  GENDER_SEXUALITY
+  HEALTHCARE_NUMBER
+  INJURY
+  IP_ADDRESS
+  LANGUAGE
+  LOCATION
+  MEDICAL_CONDITION
+  MEDICAL_PROCESS
+  MONEY_AMOUNT
+  NATIONALITY
+  NUMBER_SEQUENCE
+  OCCUPATION
+  ORGANIZATION
+  PASSPORT_NUMBER
+  PASSWORD
+  PERSON_AGE
+  PERSON_NAME
+  PHONE_NUMBER
+  POLITICAL_AFFILIATION
+  RELIGION
+  TIME
+  URL
+  USERNAME
+  VEHICLE_ID
+  BANKING_INFORMATION
+  ID_NUMBER
+}
+
+"""How to substitute redacted PII in the transcript text."""
+enum PiiSubstitutionPolicy {
+  ENTITY_NAME
+  HASH
+}
+
+"""Summarization model to use for LeMUR."""
+enum LemurModel {
+  DEFAULT
+  ANTHROPIC_CLAUDE_3_5_SONNET
+  ANTHROPIC_CLAUDE_3_OPUS
+  ANTHROPIC_CLAUDE_3_HAIKU
+  ANTHROPIC_CLAUDE_3_SONNET
+}
+
+"""Output format for LeMUR summary."""
+enum LemurSummaryContext {
+  BULLETS
+  BULLETS_VERBOSE
+  GIST
+  HEADLINE
+  PARAGRAPH
+}
+
+"""Status of redacted audio processing."""
+enum RedactedAudioStatus {
+  REDACTED_AUDIO_READY
+  REDACTING_AUDIO
+}
+
+# ─── Core Entity Types ────────────────────────────────────────────────────────
+
+"""A word in the transcript with timing and confidence information."""
+type TranscriptWord {
+  text: String!
+  start: Int!
+  end: Int!
+  confidence: Float!
+  speaker: String
+  channel: String
+}
+
+"""A sentence segment with timing."""
+type TranscriptSentence {
+  text: String!
+  start: Int!
+  end: Int!
+  confidence: Float!
+  words: [TranscriptWord!]!
+  speaker: String
+  channel: String
+}
+
+"""A paragraph segment with timing."""
+type TranscriptParagraph {
+  text: String!
+  start: Int!
+  end: Int!
+  confidence: Float!
+  words: [TranscriptWord!]!
+}
+
+"""An utterance spoken by a single speaker in a diarized transcript."""
+type Utterance {
+  speaker: String!
+  text: String!
+  start: Int!
+  end: Int!
+  confidence: Float!
+  words: [TranscriptWord!]!
+}
+
+"""Sentiment analysis result for a segment."""
+type SentimentAnalysisResult {
+  text: String!
+  start: Int!
+  end: Int!
+  sentiment: SentimentType!
+  confidence: Float!
+  speaker: String
+}
+
+"""An auto-detected chapter of the audio."""
+type Chapter {
+  summary: String!
+  gist: String!
+  headline: String!
+  start: Int!
+  end: Int!
+}
+
+"""A detected entity with its type and location in the transcript."""
+type Entity {
+  entityType: EntityType!
+  text: String!
+  start: Int!
+  end: Int!
+}
+
+"""Content safety label detected in a segment."""
+type ContentSafetyLabel {
+  label: String!
+  confidence: Float!
+  severity: Float
+}
+
+"""Content safety result for a segment."""
+type ContentSafetyResult {
+  text: String!
+  labels: [ContentSafetyLabel!]!
+  sentences_idx_start: Int!
+  sentences_idx_end: Int!
+  timestamp: TranscriptTimestamp!
+}
+
+"""Start/end timestamp."""
+type TranscriptTimestamp {
+  start: Int!
+  end: Int!
+}
+
+"""Summary of content safety categories across the transcript."""
+type ContentSafetySummary {
+  label: String!
+  confidence: Float!
+  severity: Float
+  severityScoreThreshold: Float
+  timestampsLength: Int!
+  percentageWordsOverThreshold: Float
+}
+
+"""IAB topic detected in the transcript."""
+type IabCategory {
+  label: String!
+  relevance: Float!
+}
+
+"""IAB topic result for a segment."""
+type IabCategoryResult {
+  text: String!
+  labels: [IabCategory!]!
+  timestamp: TranscriptTimestamp!
+}
+
+"""Summary of IAB category results."""
+type IabCategorySummary {
+  label: String!
+  relevance: Float!
+}
+
+"""Word searched in a transcript with match results."""
+type WordSearchMatch {
+  text: String!
+  count: Int!
+  timestamps: [[Int!]!]!
+  indexes: [Int!]!
+}
+
+"""The main Transcript resource."""
+type Transcript {
+  id: ID!
+  status: TranscriptStatus!
+  audioUrl: String
+  text: String
+  words: [TranscriptWord!]
+  utterances: [Utterance!]
+  confidence: Float
+  audioDuration: Float
+  dualChannel: Boolean
+  webhookUrl: String
+  webhookStatusCode: Int
+  webhookAuth: Boolean
+  webhookAuthHeaderName: String
+  speedBoost: Boolean
+  autoHighlights: Boolean
+  autoHighlightsResult: AutoHighlightsResult
+  audioStartFrom: Int
+  audioEndAt: Int
+  wordBoost: [String!]
+  boostParam: String
+  filterProfanity: Boolean
+  redactPii: Boolean
+  redactPiiAudio: Boolean
+  redactPiiAudioQuality: String
+  redactPiiPolicies: [PiiPolicy!]
+  redactPiiSub: PiiSubstitutionPolicy
+  speakerLabels: Boolean
+  speakersExpected: Int
+  contentSafety: Boolean
+  contentSafetyConfidence: Int
+  contentSafetyLabels: ContentSafetyLabelsResult
+  iabCategories: Boolean
+  iabCategoriesResult: IabCategoriesResult
+  languageDetection: Boolean
+  languageCode: LanguageCode
+  speechModel: SpeechModel
+  punctuate: Boolean
+  formatText: Boolean
+  disfluencies: Boolean
+  sentimentAnalysis: Boolean
+  sentimentAnalysisResults: [SentimentAnalysisResult!]
+  autoChapters: Boolean
+  chapters: [Chapter!]
+  summarization: Boolean
+  summaryType: String
+  summaryModel: String
+  summary: String
+  entityDetection: Boolean
+  entities: [Entity!]
+  throttled: Boolean
+  error: String
+  createdAt: DateTime
+  completedAt: DateTime
+}
+
+"""Paginated list of transcripts."""
+type TranscriptList {
+  transcripts: [TranscriptItem!]!
+  pageDetails: PageDetails!
+}
+
+"""Lightweight transcript summary item used in list responses."""
+type TranscriptItem {
+  id: ID!
+  status: TranscriptStatus!
+  created: DateTime!
+  completed: DateTime
+  audioUrl: String
+  error: String
+  throttled: Boolean
+  resourceUrl: String
+}
+
+"""Pagination details for list responses."""
+type PageDetails {
+  limit: Int!
+  resultCount: Int!
+  currentUrl: String!
+  prevUrl: String
+  nextUrl: String
+}
+
+"""Auto-highlight results showing key phrases."""
+type AutoHighlightsResult {
+  status: String!
+  results: [AutoHighlight!]!
+}
+
+"""A single auto-highlighted phrase."""
+type AutoHighlight {
+  count: Int!
+  rank: Float!
+  text: String!
+  timestamps: [TranscriptTimestamp!]!
+}
+
+"""Content safety labels aggregated result."""
+type ContentSafetyLabelsResult {
+  status: String!
+  results: [ContentSafetyResult!]!
+  summary: JSON
+}
+
+"""IAB categories aggregated result."""
+type IabCategoriesResult {
+  status: String!
+  results: [IabCategoryResult!]!
+  summary: JSON
+}
+
+"""Sentences response from the sentences endpoint."""
+type SentencesResponse {
+  id: ID!
+  confidence: Float!
+  audioDuration: Float!
+  sentences: [TranscriptSentence!]!
+}
+
+"""Paragraphs response from the paragraphs endpoint."""
+type ParagraphsResponse {
+  id: ID!
+  confidence: Float!
+  audioDuration: Float!
+  paragraphs: [TranscriptParagraph!]!
+}
+
+"""Word search response."""
+type WordSearchResponse {
+  id: ID!
+  totalCount: Int!
+  matches: [WordSearchMatch!]!
+}
+
+"""Redacted audio response."""
+type RedactedAudioResponse {
+  status: RedactedAudioStatus!
+  redactedAudioUrl: String
+}
+
+"""Uploaded file response."""
+type UploadedFile {
+  uploadUrl: String!
+}
+
+# ─── Realtime / Streaming Types ───────────────────────────────────────────────
+
+"""Parameters for creating a temporary realtime token."""
+type RealtimeTemporaryToken {
+  token: String!
+}
+
+"""A partial transcript event from the streaming WebSocket."""
+type PartialTranscript {
+  audioStart: Int!
+  audioEnd: Int!
+  confidence: Float!
+  text: String!
+  words: [TranscriptWord!]!
+  created: DateTime!
+}
+
+"""A final transcript event from the streaming WebSocket."""
+type FinalTranscript {
+  audioStart: Int!
+  audioEnd: Int!
+  confidence: Float!
+  text: String!
+  words: [TranscriptWord!]!
+  punctuated: Boolean!
+  textFormatted: Boolean!
+  created: DateTime!
+}
+
+"""Session information returned when a realtime session is opened."""
+type RealtimeSessionInfo {
+  sessionId: ID!
+  expiresAt: DateTime!
+}
+
+# ─── LeMUR Types ─────────────────────────────────────────────────────────────
+
+"""Context object for a LeMUR request (transcript IDs or input text)."""
+type LemurUsage {
+  inputTokens: Int!
+  outputTokens: Int!
+}
+
+"""Result of a LeMUR task."""
+type LemurTaskResponse {
+  requestId: ID!
+  usage: LemurUsage
+  response: String!
+}
+
+"""Result of a LeMUR summary request."""
+type LemurSummaryResponse {
+  requestId: ID!
+  usage: LemurUsage
+  response: String!
+}
+
+"""A single question-answer pair from LeMUR Q&A."""
+type LemurQuestionAnswer {
+  question: String!
+  answer: String!
+}
+
+"""Result of a LeMUR question-answer request."""
+type LemurQuestionAnswerResponse {
+  requestId: ID!
+  usage: LemurUsage
+  response: [LemurQuestionAnswer!]!
+}
+
+"""Result of a LeMUR action items request."""
+type LemurActionItemsResponse {
+  requestId: ID!
+  usage: LemurUsage
+  response: String!
+}
+
+"""Result of purging a LeMUR request."""
+type PurgeLemurRequestDataResponse {
+  requestId: ID!
+  deleted: Boolean!
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+"""Input for creating a new transcript."""
+input CreateTranscriptInput {
+  audioUrl: String!
+  languageCode: LanguageCode
+  speechModel: SpeechModel
+  punctuate: Boolean
+  formatText: Boolean
+  dualChannel: Boolean
+  webhookUrl: String
+  webhookAuthHeaderName: String
+  webhookAuthHeaderValue: String
+  autoHighlights: Boolean
+  audioStartFrom: Int
+  audioEndAt: Int
+  wordBoost: [String!]
+  boostParam: String
+  filterProfanity: Boolean
+  redactPii: Boolean
+  redactPiiAudio: Boolean
+  redactPiiAudioQuality: String
+  redactPiiPolicies: [PiiPolicy!]
+  redactPiiSub: PiiSubstitutionPolicy
+  speakerLabels: Boolean
+  speakersExpected: Int
+  contentSafety: Boolean
+  contentSafetyConfidence: Int
+  iabCategories: Boolean
+  languageDetection: Boolean
+  disfluencies: Boolean
+  sentimentAnalysis: Boolean
+  autoChapters: Boolean
+  entityDetection: Boolean
+  summarization: Boolean
+  summaryModel: String
+  summaryType: String
+  customSpelling: [CustomSpellingInput!]
+}
+
+"""Input for custom spelling rules."""
+input CustomSpellingInput {
+  from: [String!]!
+  to: String!
+}
+
+"""Input for listing transcripts with filters."""
+input ListTranscriptsInput {
+  limit: Int
+  status: TranscriptStatus
+  createdOn: String
+  beforeId: ID
+  afterId: ID
+  throttledOnly: Boolean
+}
+
+"""Input for a LeMUR task request."""
+input LemurTaskInput {
+  transcriptIds: [ID!]
+  inputText: String
+  prompt: String!
+  context: String
+  finalModel: LemurModel
+  maxOutputSize: Int
+  temperature: Float
+}
+
+"""Input for a LeMUR summary request."""
+input LemurSummaryInput {
+  transcriptIds: [ID!]
+  inputText: String
+  context: String
+  answerFormat: LemurSummaryContext
+  finalModel: LemurModel
+  maxOutputSize: Int
+  temperature: Float
+}
+
+"""A single question for the LeMUR Q&A endpoint."""
+input LemurQuestionInput {
+  question: String!
+  context: String
+  answerFormat: String
+  answerOptions: [String!]
+}
+
+"""Input for a LeMUR question-answer request."""
+input LemurQuestionAnswerInput {
+  transcriptIds: [ID!]
+  inputText: String
+  questions: [LemurQuestionInput!]!
+  context: String
+  finalModel: LemurModel
+  maxOutputSize: Int
+  temperature: Float
+}
+
+"""Input for a LeMUR action items request."""
+input LemurActionItemsInput {
+  transcriptIds: [ID!]
+  inputText: String
+  context: String
+  answerFormat: String
+  finalModel: LemurModel
+  maxOutputSize: Int
+  temperature: Float
+}
+
+"""Input for creating a realtime temporary token."""
+input CreateRealtimeTokenInput {
+  expiresIn: Int!
+}
+
+"""Input for word search."""
+input WordSearchInput {
+  transcriptId: ID!
+  words: [String!]!
+}
+
+"""Input for getting subtitles."""
+input GetSubtitlesInput {
+  transcriptId: ID!
+  subtitleFormat: SubtitleFormat!
+  charsPerCaption: Int
+}
+
+# ─── Connection / Pagination Types ───────────────────────────────────────────
+
+"""Edge wrapper for TranscriptItem in a connection."""
+type TranscriptEdge {
+  node: TranscriptItem!
+  cursor: String!
+}
+
+"""Relay-style connection for transcripts."""
+type TranscriptConnection {
+  edges: [TranscriptEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int
+}
+
+"""Relay-style page information."""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ─── Query Root ───────────────────────────────────────────────────────────────
+
+type Query {
+  """Get a single transcript by ID."""
+  transcript(id: ID!): Transcript
+
+  """List transcripts with optional filters and pagination."""
+  transcripts(input: ListTranscriptsInput): TranscriptList!
+
+  """Get transcript content split into sentences."""
+  transcriptSentences(transcriptId: ID!): SentencesResponse!
+
+  """Get transcript content split into paragraphs."""
+  transcriptParagraphs(transcriptId: ID!): ParagraphsResponse!
+
+  """Search for words or phrases within a transcript."""
+  wordSearch(input: WordSearchInput!): WordSearchResponse!
+
+  """Get subtitles for a transcript in SRT or VTT format."""
+  subtitles(input: GetSubtitlesInput!): String!
+
+  """Get redacted audio status and URL for a transcript."""
+  redactedAudio(transcriptId: ID!): RedactedAudioResponse!
+
+  """Relay-style paginated transcript listing."""
+  transcriptConnection(first: Int, after: String, last: Int, before: String, status: TranscriptStatus): TranscriptConnection!
+}
+
+# ─── Mutation Root ────────────────────────────────────────────────────────────
+
+type Mutation {
+  """Upload a local audio file and receive a hosted URL."""
+  uploadFile(file: Upload!): UploadedFile!
+
+  """Submit an audio URL for async transcription."""
+  createTranscript(input: CreateTranscriptInput!): Transcript!
+
+  """Delete transcript data (marks transcript as deleted, removes data)."""
+  deleteTranscript(id: ID!): Transcript!
+
+  """Create a temporary authentication token for Realtime Streaming STT."""
+  createRealtimeToken(input: CreateRealtimeTokenInput!): RealtimeTemporaryToken!
+
+  """Run a custom LLM prompt over transcripts via LeMUR."""
+  lemurTask(input: LemurTaskInput!): LemurTaskResponse!
+
+  """Generate a summary of transcripts via LeMUR."""
+  lemurSummary(input: LemurSummaryInput!): LemurSummaryResponse!
+
+  """Ask questions about transcripts via LeMUR."""
+  lemurQuestionAnswer(input: LemurQuestionAnswerInput!): LemurQuestionAnswerResponse!
+
+  """Extract action items from transcripts via LeMUR."""
+  lemurActionItems(input: LemurActionItemsInput!): LemurActionItemsResponse!
+
+  """Purge data for a previously submitted LeMUR request."""
+  purgeLemurRequest(requestId: ID!): PurgeLemurRequestDataResponse!
+}
+
+# ─── Subscription Root ────────────────────────────────────────────────────────
+
+type Subscription {
+  """Stream partial transcript events from a realtime session."""
+  partialTranscript(sessionId: ID!): PartialTranscript!
+
+  """Stream final transcript events from a realtime session."""
+  finalTranscript(sessionId: ID!): FinalTranscript!
+
+  """Receive session lifecycle events (opened, closed, error)."""
+  realtimeSession(sessionId: ID!): RealtimeSessionInfo!
+
+  """Poll for status updates on an async transcript until completion."""
+  transcriptStatus(transcriptId: ID!): Transcript!
+}
