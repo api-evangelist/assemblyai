@@ -48,11 +48,11 @@ apis:
     url: openapi/assemblyai-asyncapi-original.yml
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/assemblyai-lemur.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/assemblyai-streaming.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/assemblyai-transcript.yaml
   - url: graphql/assemblyai-graphql.md
     type: GraphQL
@@ -68,7 +68,7 @@ common:
 - type: Blog
   url: https://www.assemblyai.com/blog
   title: Blog
-- type: SignUp
+- type: Signup
   url: https://www.assemblyai.com/dashboard/signup
   title: Sign Up
 - type: Login
@@ -135,7 +135,7 @@ common:
       for JavaScript and TypeScript applications.
 - name: Agent Skills
   url: https://github.com/AssemblyAI/assemblyai-skill
-  type: AgentSkill
+  type: AgentSkills
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
