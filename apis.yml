@@ -57,6 +57,10 @@ apis:
   - url: graphql/assemblyai-graphql.md
     type: GraphQL
 common:
+- type: TrustCenter
+  url: security/assemblyai-trust-center.yml
+- type: DomainSecurity
+  url: security/assemblyai-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/assemblyai
 - type: Portal
