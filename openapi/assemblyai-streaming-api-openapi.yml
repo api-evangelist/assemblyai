@@ -1,0 +1,58 @@
+openapi: 3.1.0
+info:
+  title: AssemblyAI LeMUR Streaming API
+  description: AssemblyAI API
+  version: 1.1.2
+  contact:
+    name: API Support
+    email: support@assemblyai.com
+    url: https://www.assemblyai.com/docs/
+servers:
+- url: https://api.assemblyai.com
+  description: AssemblyAI API
+security:
+- ApiKey: []
+tags:
+- name: Streaming
+  description: Streaming Speech-to-Text
+  externalDocs:
+    url: https://www.assemblyai.com/docs/speech-to-text/streaming
+paths:
+  /v2/realtime/token:
+    post:
+      tags:
+      - Streaming
+      summary: AssemblyAI Create temporary authentication token for Streaming STT
+      description: Create a temporary authentication token for Streaming Speech-to-Text
+      operationId: createTemporaryToken
+      x-fern-sdk-group-name: realtime
+      x-fern-sdk-method-name: createTemporaryToken
+      x-fern-request-name: CreateRealtimeTemporaryTokenParams
+      requestBody:
+        description: Params to create a temporary authentication token
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRealtimeTemporaryTokenParams'
+      responses:
+        '200':
+          description: Temporary authentication token generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RealtimeTemporaryTokenResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'

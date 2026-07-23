@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: AssemblyAI LeMUR API
+  description: AssemblyAI API
+  version: 1.1.2
+  contact:
+    name: API Support
+    email: support@assemblyai.com
+    url: https://www.assemblyai.com/docs/
+servers:
+- url: https://api.assemblyai.com
+  description: AssemblyAI API
+security:
+- ApiKey: []
+tags:
+- name: LeMUR
+  description: LeMUR related operations
+  externalDocs:
+    url: https://www.assemblyai.com/docs/guides/processing-audio-with-llms-using-lemur
+paths:
+  /lemur/v3/generate/task:
+    post:
+      tags:
+      - LeMUR
+      summary: AssemblyAI Run a task using LeMUR
+      description: Use the LeMUR task endpoint to input your own LLM prompt.
+      operationId: lemurTask
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: task
+      x-fern-request-name: LemurTaskParams
+      requestBody:
+        description: Params to run the task
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LemurTaskParams'
+      responses:
+        '200':
+          description: LeMUR task response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LemurTaskResponse'
+          links:
+            PurgeLemurRequestDataById:
+              $ref: '#/components/links/PurgeLemurRequestDataById'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+  /lemur/v3/generate/summary:
+    post:
+      tags:
+      - LeMUR
+      summary: AssemblyAI Summarize a transcript using LeMUR
+      description: 'Custom Summary allows you to distill a piece of audio into a few impactful sentences.
+
+        You can give the model context to obtain more targeted results while outputting the results in a variety of formats described in human language.
+
+        '
+      operationId: lemurSummary
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: summary
+      x-fern-request-name: LemurSummaryParams
+      requestBody:
+        description: Params to generate the summary
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LemurSummaryParams'
+      responses:
+        '200':
+          description: LeMUR summary response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LemurSummaryResponse'
+          links:
+            PurgeLemurRequestDataById:
+              $ref: '#/components/links/PurgeLemurRequestDataById'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+  /lemur/v3/generate/question-answer:
+    post:
+      tags:
+      - LeMUR
+      summary: AssemblyAI Ask questions using LeMUR
+      description: 'Question & Answer allows you to ask free-form questions about a single transcript or a group of transcripts.
+
+        The questions can be any whose answers you find useful, such as judging whether a caller is likely to become a customer or whether all items on a meeting''s agenda were covered.
+
+        '
+      operationId: lemurQuestionAnswer
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: questionAnswer
+      x-fern-request-name: LemurQuestionAnswerParams
+      requestBody:
+        description: Params to ask questions about the transcripts
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LemurQuestionAnswerParams'
+      responses:
+        '200':
+          description: LeMUR question & answer response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LemurQuestionAnswerResponse'
+          links:
+            PurgeLemurRequestDataById:
+              $ref: '#/components/links/PurgeLemurRequestDataById'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+  /lemur/v3/generate/action-items:
+    post:
+      tags:
+      - LeMUR
+      summary: AssemblyAI Extract action items
+      operationId: lemurActionItems
+      x-label: Extract action items using LeMUR
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: actionItems
+      x-fern-request-name: LemurActionItemsParams
+      description: Use LeMUR to generate a list of action items from a transcript
+      requestBody:
+        description: Params to generate action items from transcripts
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LemurActionItemsParams'
+      responses:
+        '200':
+          description: LeMUR action items response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LemurActionItemsResponse'
+          links:
+            PurgeLemurRequestDataById:
+              $ref: '#/components/links/PurgeLemurRequestDataById'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+  /lemur/v3/{request_id}:
+    delete:
+      tags:
+      - LeMUR
+      summary: AssemblyAI Purge LeMUR request data
+      description: 'Delete the data for a previously submitted LeMUR request.
+
+        The LLM response data, as well as any context provided in the original request will be removed.
+
+        '
+      operationId: purgeLemurRequestData
+      x-fern-sdk-group-name: lemur
+      x-fern-sdk-method-name: purgeRequestData
+      x-fern-request-name: PurgeLemurRequestDataParams
+      parameters:
+      - name: request_id
+        x-label: LeMUR request ID
+        in: path
+        description: The ID of the LeMUR request whose data you want to delete. This would be found in the response of the original request.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: LeMUR request data deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurgeLemurRequestDataResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
