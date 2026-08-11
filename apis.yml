@@ -56,12 +56,6 @@ apis:
     url: openapi/assemblyai-asyncapi-original.yml
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-lemur.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-streaming.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-transcript.yaml
   - type: GraphQL
     url: graphql/assemblyai-graphql.md
 - aid: assemblyai:assemblyai-streaming-api
@@ -86,12 +80,6 @@ apis:
     url: openapi/assemblyai-asyncapi-original.yml
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-lemur.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-streaming.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-transcript.yaml
   - type: GraphQL
     url: graphql/assemblyai-graphql.md
 - aid: assemblyai:assemblyai-transcript-api
@@ -116,12 +104,6 @@ apis:
     url: openapi/assemblyai-asyncapi-original.yml
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-lemur.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-streaming.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/assemblyai-transcript.yaml
   - type: GraphQL
     url: graphql/assemblyai-graphql.md
 common:
