@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AssemblyAI LeMUR API",
+    "version": "1.1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LeMUR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AssemblyAI Run a task using LeMUR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.assemblyai.com/lemur/v3/generate/task",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use the LeMUR task endpoint to input your own LLM prompt."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Summarize a transcript using LeMUR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.assemblyai.com/lemur/v3/generate/summary",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Custom Summary allows you to distill a piece of audio into a few impactful sentences.\nYou can give the model context to obtain more targeted results while outputting the results in a variety of formats described in human language.\n"
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Ask questions using LeMUR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.assemblyai.com/lemur/v3/generate/question-answer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Question & Answer allows you to ask free-form questions about a single transcript or a group of transcripts.\nThe questions can be any whose answers you find useful, such as judging whether a caller is likely to become a customer or whether all items on a meeting's agenda were covered.\n"
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Extract action items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.assemblyai.com/lemur/v3/generate/action-items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use LeMUR to generate a list of action items from a transcript"
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Purge LeMUR request data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.assemblyai.com/lemur/v3/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the LeMUR request whose data you want to delete. This would be found in the response of the original request."
+              }
+            ]
+          },
+          "docs": "Delete the data for a previously submitted LeMUR request.\nThe LLM response data, as well as any context provided in the original request will be removed.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

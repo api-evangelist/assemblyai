@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AssemblyAI LeMUR Transcript API",
+    "version": "1.1.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transcript",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AssemblyAI Upload a media file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.assemblyai.com/v2/upload"
+          },
+          "docs": "Upload a media file to AssemblyAI's servers."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI List transcripts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum amount of transcripts to retrieve"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transcript status"
+              },
+              {
+                "name": "created_on",
+                "value": "",
+                "type": "query",
+                "description": "Only get transcripts created on this date"
+              },
+              {
+                "name": "before_id",
+                "value": "",
+                "type": "query",
+                "description": "Get transcripts that were created before this transcript ID"
+              },
+              {
+                "name": "after_id",
+                "value": "",
+                "type": "query",
+                "description": "Get transcripts that were created after this transcript ID"
+              },
+              {
+                "name": "throttled_only",
+                "value": "",
+                "type": "query",
+                "description": "Only get throttled transcripts, overrides the status filter"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of transcripts you created.\nTranscripts are sorted from newest to oldest. The previous URL always points to a page with older transcripts.\n"
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Transcribe audio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.assemblyai.com/v2/transcript",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a transcript from a media file that is accessible via a URL."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Get transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              }
+            ]
+          },
+          "docs": "Get the transcript resource. The transcript is ready when the \"status\" is \"completed\"."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Delete transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              }
+            ]
+          },
+          "docs": "Delete the transcript.\nDeleting does not delete the resource itself, but removes the data from the resource and marks it as deleted.\n"
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Get subtitles for transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id/:subtitle_format",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              },
+              {
+                "name": "subtitle_format",
+                "value": "",
+                "type": "path",
+                "description": "The format of the captions"
+              },
+              {
+                "name": "chars_per_caption",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of characters per caption"
+              }
+            ]
+          },
+          "docs": "Export your transcript in SRT or VTT format to use with a video player for subtitles and closed captions."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Get sentences in transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id/sentences",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              }
+            ]
+          },
+          "docs": "Get the transcript split by sentences. The API will attempt to semantically segment the transcript into sentences to create more reader-friendly transcripts."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Get paragraphs in transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id/paragraphs",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              }
+            ]
+          },
+          "docs": "Get the transcript split by paragraphs. The API will attempt to semantically segment your transcript into paragraphs to create more reader-friendly transcripts."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Search words in transcript",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id/word-search",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              },
+              {
+                "name": "words",
+                "value": "",
+                "type": "query",
+                "description": "Keywords to search for"
+              }
+            ]
+          },
+          "docs": "Search through the transcript for keywords. You can search for individual words, numbers, or phrases containing up to five words or numbers."
+        },
+        {
+          "info": {
+            "name": "AssemblyAI Get redacted audio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.assemblyai.com/v2/transcript/:transcript_id/redacted-audio",
+            "params": [
+              {
+                "name": "transcript_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the transcript"
+              }
+            ]
+          },
+          "docs": "Retrieve the redacted audio object containing the status and URL to the redacted audio."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

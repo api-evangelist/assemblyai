@@ -1,0 +1,3888 @@
+{
+  "item": [
+    {
+      "id": "c7d09065-82bb-494e-8d71-f7aa8f52eecf",
+      "name": "Transcript",
+      "description": {
+        "content": "Transcript related operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5812afe-e4ac-4fdb-9bc2-03128692ac16",
+          "name": "AssemblyAI Upload a media file",
+          "request": {
+            "name": "AssemblyAI Upload a media file",
+            "description": {
+              "content": "Upload a media file to AssemblyAI's servers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/octet-stream"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "file"
+            }
+          },
+          "response": [
+            {
+              "id": "0f93d722-8183-451a-8dc5-38dd9559c8b2",
+              "name": "Media file uploaded successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5eefc5a-bd3c-428a-a561-a6d0f42633a9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3d6edd5c-40a8-488a-8cbd-4cb7f8aa93d5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f59663e6-b100-4bbf-a8e9-2d9deab7a02f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "921e8630-6792-46b6-83ea-95ed3a8ba28c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0417a8d3-e41a-4861-bb4b-631a9a5c49e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d637c078-9970-45c1-9c40-d528cc16e739",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c8a9ca49-f4a1-4541-8864-f2b20c81d09c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "file"
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaa2ff21-4934-4c59-9da5-94f7e6afdc00",
+          "name": "AssemblyAI Transcribe audio",
+          "request": {
+            "name": "AssemblyAI Transcribe audio",
+            "description": {
+              "content": "Create a transcript from a media file that is accessible via a URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3d53c182-eb78-4869-8716-c2758448758b",
+              "name": "Transcript created and queued for processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f45bfb54-53ab-4b50-9e21-a8338963f348",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "981143cb-7ab4-4b5a-9932-de77f2607b4a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3513f5f4-fb2e-4d8a-a497-5c525537beee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e5e2876-b795-452b-8792-6e9aabe963c4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39b2908d-12fa-476f-963e-27fc07b0e8d6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2fc2f95-c2c1-4c8e-8c95-506512f39b8f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a19265b-afb8-4f37-9480-9c09c215fc87",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1570c01b-149e-4846-b796-e3f62f4aba40",
+          "name": "AssemblyAI List transcripts",
+          "request": {
+            "name": "AssemblyAI List transcripts",
+            "description": {
+              "content": "Retrieve a list of transcripts you created.\nTranscripts are sorted from newest to oldest. The previous URL always points to a page with older transcripts.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec",
+                  "description": "Maximum amount of transcripts to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec",
+                  "description": "Filter by transcript status"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec",
+                  "description": "Only get transcripts created on this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec",
+                  "description": "Get transcripts that were created before this transcript ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec",
+                  "description": "Get transcripts that were created after this transcript ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec",
+                  "description": "Only get throttled transcripts, overrides the status filter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd195375-1f21-4992-93bf-e544d68bc8da",
+              "name": "A list of transcripts. Transcripts are sorted from newest to oldest. The previous URL always points to a page with older transcripts.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "650d601b-4409-44cf-aebe-cb50687dc6c5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "87e09249-92ca-4eab-a1c4-8d7fe53dbaa3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "395d9900-720f-467a-9e4e-8aa3094e7f15",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5fc2115c-f75c-4e10-8bea-8f5d8ada92c1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2bcc069-f0d1-41c4-ba7b-23b052e3469f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9bc0666-a7d5-4132-bbb7-5e51a093a462",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "31a39488-3146-42a6-a56e-9a4e055272d7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/limit not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/TranscriptStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/created_on not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/before_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/after_id not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/ListTranscriptParams/properties/throttled_only not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7e6d6c5-08e3-486a-a392-a1fdbbd1debe",
+          "name": "AssemblyAI Get transcript",
+          "request": {
+            "name": "AssemblyAI Get transcript",
+            "description": {
+              "content": "Get the transcript resource. The transcript is ready when the \"status\" is \"completed\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5e53291-6a79-43d5-8470-f7fb326f0445",
+              "name": "The transcript resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db3c8ab0-42f1-428d-bb93-a90f7ad9d165",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46c0ce2f-b0de-4437-a7df-d414a2ab892d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "73299dd3-f41d-4ae6-8fd9-3e9c9a454f6e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c4e33a1-4d05-424d-9a1e-6040cc64bce0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9fb78f9b-ced1-43f3-a9fe-1cf43fabc542",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3495b15c-1b48-46b7-8297-4320a5cc5629",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93cd7828-dd66-4e85-9471-e09c750827c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8196e64-26b7-4606-89a6-b908d28fac55",
+          "name": "AssemblyAI Delete transcript",
+          "request": {
+            "name": "AssemblyAI Delete transcript",
+            "description": {
+              "content": "Delete the transcript.\nDeleting does not delete the resource itself, but removes the data from the resource and marks it as deleted.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d988f8c1-3d21-4bdd-9c5e-e3f63d3b3774",
+              "name": "The deleted transcript response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a94daf8-a682-47a7-b31b-5a424ea55452",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf1d332b-63a3-4ab6-ad6b-a7d9ed2de3c5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9584e484-fa57-49ca-b829-bcd3252f623d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6bfe9ba-fb71-4d2e-b76b-9b2a72fe02a1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51b1b8a8-f321-41eb-8928-0767fe8361b5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5bb9b760-c388-492d-95db-ee03af9558a2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f76e2948-8e2b-41f9-b2cb-8ff5b625d65c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f2bc50c-8a75-4808-a998-49f9454b7438",
+          "name": "AssemblyAI Get subtitles for transcript",
+          "request": {
+            "name": "AssemblyAI Get subtitles for transcript",
+            "description": {
+              "content": "Export your transcript in SRT or VTT format to use with a video player for subtitles and closed captions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id",
+                ":subtitle_format"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "chars_per_caption",
+                  "value": "<integer>",
+                  "description": "The maximum number of characters per caption"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                  "key": "subtitle_format",
+                  "description": "(Required) The format of the captions"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f1f1bd3-a046-4537-b7fa-a72080ab273c",
+              "name": "The exported captions as text",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "WEBVTT\n00:12.340 --> 00:16.220\nLast year I showed these two slides said that demonstrate\n00:16.200 --> 00:20.040\nthat the Arctic ice cap which for most of the last 3,000,000 years has been the\n00:20.020 --> 00:25.040\nsize of the lower 48 States has shrunk by 40% but this understates\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc27b9a8-140e-46d5-8147-e52859d9d286",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11ee49c8-b0dc-4600-807b-1cda8fcbda1e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4beb5cd-21fd-4680-b36e-8a60911750e0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9aa01bd-4dca-4732-b421-5da147c265d3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3e5732dd-0a26-451c-adb8-e89923735c94",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "80fe4403-8a3b-4b03-b0ae-e5c8e30994c3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3facf12-cec0-48ba-b8a0-28a5be40ac60",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    ":subtitle_format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "chars_per_caption",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "reference #/components/schemas/SubtitleFormat not found in the OpenAPI spec",
+                      "key": "subtitle_format",
+                      "description": "(Required) The format of the captions"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d150dea-cf69-45ea-bdcd-dd36453dd77e",
+          "name": "AssemblyAI Get sentences in transcript",
+          "request": {
+            "name": "AssemblyAI Get sentences in transcript",
+            "description": {
+              "content": "Get the transcript split by sentences. The API will attempt to semantically segment the transcript into sentences to create more reader-friendly transcripts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id",
+                "sentences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "867bc015-064f-4e11-9c68-28ede4e75dc6",
+              "name": "Exported sentences",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4232625b-993f-4b73-a104-d90551dd14e9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3f5c100-53d6-4cc0-919f-e606354c39d7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "146ef180-cc33-4a90-8885-e94392103725",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7e8330f-0cc8-4335-8018-5e356edc9d02",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e70fc632-d625-4b2e-ae4f-57301c2b9cac",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2772ca36-60fb-4bcb-b56f-aad36d320558",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "108ca609-9248-41c3-a7f8-e3fb0642fca5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "sentences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "026fed30-48aa-4f11-9571-8ad4092041d9",
+          "name": "AssemblyAI Get paragraphs in transcript",
+          "request": {
+            "name": "AssemblyAI Get paragraphs in transcript",
+            "description": {
+              "content": "Get the transcript split by paragraphs. The API will attempt to semantically segment your transcript into paragraphs to create more reader-friendly transcripts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id",
+                "paragraphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9d80e04-150a-4433-96a2-e2f73bc1f4a2",
+              "name": "Exported paragraphs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4497cd0b-646c-4be0-87cb-a71c957bf307",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78024c51-1e5a-489c-b55a-cd508c44e912",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e75825ac-7658-476e-8632-4e8d3db55989",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ef644fc-ee29-4f19-aa5b-b8a493303ac1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6286d8b3-fcbd-4084-b436-331caebcc35b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9b7e39e0-42f3-452f-8a60-44384da83b7b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "69c85308-037c-482a-95d4-f6d9efffcfb2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "paragraphs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3db436cd-7c6b-4a60-82f1-f246d5cff41c",
+          "name": "AssemblyAI Search words in transcript",
+          "request": {
+            "name": "AssemblyAI Search words in transcript",
+            "description": {
+              "content": "Search through the transcript for keywords. You can search for individual words, numbers, or phrases containing up to five words or numbers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id",
+                "word-search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "words",
+                  "value": "<string>,<string>",
+                  "description": "(Required) Keywords to search for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d17c73bf-b0ec-45c4-a565-c0e90b9d0f05",
+              "name": "Word search response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7aaee6d-85b8-4434-a8a3-f5660cbcc7cc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "387dc3c6-60e8-4066-8deb-898970b87483",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58b38cde-aaf9-43de-9960-e62ce83219aa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b0eca32d-5e64-4f57-941f-4d27d6ed054a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bfa9c15d-f533-426d-92e2-f01b4fa5227e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d04b57f8-1bd2-452c-97cc-6ba52f36c27f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebe1c575-38ef-4f38-9acb-d95eb35fe017",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "word-search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "words",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "def7a442-5067-4c8d-9d81-b00c3de80fe0",
+          "name": "AssemblyAI Get redacted audio",
+          "request": {
+            "name": "AssemblyAI Get redacted audio",
+            "description": {
+              "content": "Retrieve the redacted audio object containing the status and URL to the redacted audio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "transcript",
+                ":transcript_id",
+                "redacted-audio"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transcript_id",
+                  "description": "(Required) ID of the transcript"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7b82349-f1eb-498d-a93b-7263cdfd3c26",
+              "name": "The redacted audio object containing the status and URL to the redacted audio",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "477f5524-04d4-48c8-a3e7-3e8b51e67e08",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0e2e1018-726b-406e-9cfb-c2e65e468606",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf7c18ae-a3bf-44cd-9ce8-a07486649674",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "08e89865-f568-42d1-9579-4180dbb1b17a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4380acd4-1a0f-480a-940c-eac09f7188c8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd8e95cd-b4c9-4f64-b6c2-43b37aab4c71",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cf5d0176-c5f7-4d24-b6f0-3f0ce09213f7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "transcript",
+                    ":transcript_id",
+                    "redacted-audio"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transcript_id",
+                      "description": "(Required) ID of the transcript"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.assemblyai.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "69537a6c-9076-41bf-ac5f-517767e5671c",
+    "name": "AssemblyAI LeMUR Transcript API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "AssemblyAI API\n\nContact Support:\n Name: API Support\n Email: support@assemblyai.com",
+      "type": "text/plain"
+    }
+  }
+}
