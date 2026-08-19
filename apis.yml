@@ -32,7 +32,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/assemblyai/refs/heads/main/apis.yml
 created: '2024-06-06'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: assemblyai:assemblyai-lemur-api
   name: AssemblyAI LeMUR API
