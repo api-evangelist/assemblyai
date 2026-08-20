@@ -23,6 +23,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/assemblyai.png
 tags:
+- Artificial Intelligence
+- Audio
+- Speech
+- Transcription
+- Speech-to-Text
+tags_raw:
 - AI
 - Artificial Intelligence
 - Audio
@@ -40,6 +46,8 @@ apis:
   humanURL: https://www.assemblyai.com/docs/
   baseURL: https://api.assemblyai.com
   tags:
+  - LEMUR
+  tags_raw:
   - LeMUR
   properties:
   - type: OpenAPI
@@ -88,6 +96,8 @@ apis:
   humanURL: https://www.assemblyai.com/docs/
   baseURL: https://api.assemblyai.com
   tags:
+  - transcript
+  tags_raw:
   - Transcript
   properties:
   - type: OpenAPI
