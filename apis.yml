@@ -58,7 +58,7 @@ apis:
   humanURL: https://www.assemblyai.com/docs/
   baseURL: https://api.assemblyai.com
   tags:
-  - LEMUR
+  - LeMUR
   tags_raw:
   - LeMUR
   properties:
