@@ -58,7 +58,7 @@ apis:
   humanURL: https://www.assemblyai.com/docs/
   baseURL: https://api.assemblyai.com
   tags:
-  - LeMUR
+  - LEMUR
   tags_raw:
   - LeMUR
   properties:
@@ -108,7 +108,7 @@ apis:
   humanURL: https://www.assemblyai.com/docs/
   baseURL: https://api.assemblyai.com
   tags:
-  - transcript
+  - Transcript
   tags_raw:
   - Transcript
   properties:
