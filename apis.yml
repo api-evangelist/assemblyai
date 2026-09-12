@@ -129,6 +129,8 @@ apis:
   - type: GraphQL
     url: graphql/assemblyai-graphql.md
 common:
+- type: Website
+  url: https://www.assemblyai.com/
 - type: AgenticAccess
   url: agentic-access/assemblyai-agentic-access.yml
 - type: TrustCenter
