@@ -1,0 +1,34 @@
+# Front Door AI Index — assemblyai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: assemblyai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.assemblyai.com
+  final_host: www.assemblyai.com
+  ownership: own
+  owner: assemblyai
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 53
+  host_score: 53
+  density: 34.28
+  words: 1546
+  tiers:
+    agentic: 6
+    core: 44
+    model: 3
+  ambiguous: 23
+  top_terms:
+    AI: 36
+    agent: 20
+    LLMs: 8
+    inference: 4
+    intelligence: 3
+    Claude: 1
+    GPT: 1
+    Gemini: 1
+    agentic: 1
+    prompts: 1

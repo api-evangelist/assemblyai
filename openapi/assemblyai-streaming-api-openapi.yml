@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AssemblyAI LeMUR Streaming API
+  title: AssemblyAI Streaming API
   description: AssemblyAI API
   version: 1.1.2
   contact:
