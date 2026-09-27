@@ -42,6 +42,7 @@ tags:
 - Speech-to-Text
 - Voice
 - Real-Time
+- Voice AI
 tags_raw:
 - AI
 - Artificial Intelligence
@@ -51,6 +52,7 @@ tags_raw:
 - Speech to Text
 - Voice
 - Real-Time
+- Voice AI
 url: https://raw.githubusercontent.com/api-evangelist/assemblyai/refs/heads/main/apis.yml
 created: '2024-06-06'
 modified: '2026-05-19'
