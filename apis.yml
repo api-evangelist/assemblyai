@@ -129,6 +129,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
 common:
+- type: Plans
+  url: plans/assemblyai-plans-pricing.yml
 - type: Website
   url: https://www.assemblyai.com/
 - type: AgenticAccess
