@@ -129,6 +129,10 @@ apis:
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
 common:
+- type: RateLimits
+  url: rate-limits/assemblyai-rate-limits.yml
+- type: FinOps
+  url: finops/assemblyai-finops.yml
 - type: Plans
   url: plans/assemblyai-plans-pricing.yml
 - type: Website
