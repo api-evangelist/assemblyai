@@ -134,6 +134,17 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
+- slug: assemblyai-llamaindex
+  label: LlamaIndex
+  partner: llamaindex
+  partner_name: LlamaIndex
+  type: coverage
+  channel: partner-built
+  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/readers/llama-index-readers-assemblyai
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
 - slug: assemblyai-pipecat
   label: Pipecat
   partner: pipecat-ai
@@ -156,14 +167,54 @@
   relationship: system-coverage
   status: not-a-workflow
   arazzo: null
-- slug: assemblyai-llamaindex
-  label: LlamaIndex
-  partner: llamaindex
-  partner_name: LlamaIndex
-  type: coverage
-  channel: partner-built
-  evidence: https://github.com/run-llama/llama_index/tree/main/llama-index-integrations/readers/llama-index-readers-assemblyai
+- slug: assemblyai-zapier
+  label: Zapier
+  partner: zapier
+  partner_name: Zapier
+  type: marketplace
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  evidence: https://zapier.com/apps/assemblyai/integrations
   source: edge
-  relationship: system-coverage
-  status: not-a-workflow
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: AssemblyAI
+    matched_domain: assemblyai.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: assemblyai
+    beta: false
+    builder: unknown (not in the directory record)
+  status: pending-generation
+  arazzo: null
+- slug: assemblyai-pipedream
+  label: Pipedream
+  partner: pipedream
+  partner_name: Pipedream
+  type: marketplace
+  marketplace: pipedream-components
+  channel: open-source-node
+  evidence: https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/assemblyai
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Pipedream components (PipedreamHQ/pipedream components/)
+    spec_file: null
+    role: ipaas-connector:pipedream
+    registered_name: assemblyai
+    matched_domain: assemblyai.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: assemblyai
+    actions: true
+    sources: true
+    builder: Pipedream repo (component)
+  status: pending-generation
   arazzo: null
