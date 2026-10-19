@@ -1,67 +1,18 @@
 {
   "provider": "assemblyai",
   "sources": [
-    "_original/assemblyai-openapi-original.yml"
+    "_original/assemblyai-openapi.json"
   ],
   "outputs": [
-    "assemblyai-lemur-api-openapi.yml",
-    "assemblyai-streaming-api-openapi.yml",
     "assemblyai-transcript-api-openapi.yml"
   ],
   "archived": [],
-  "errors": [
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/DeleteTranscriptById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/GetTranscriptById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/GetTranscriptParagraphsById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/GetTranscriptRedactedAudioById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/GetTranscriptSentencesById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/GetTranscriptSubtitlesById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/PurgeLemurRequestDataById",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/links/WordSearchByTranscriptId",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/BadRequest",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/GatewayTimeout",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/InternalServerError",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/NotFound",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/ServiceUnavailable",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/TooManyRequests",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/responses/Unauthorized",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/CreateRealtimeTemporaryTokenParams",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurActionItemsParams",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurActionItemsResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurQuestionAnswerParams",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurQuestionAnswerResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurSummaryParams",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurSummaryResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurTaskParams",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/LemurTaskResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/ListTranscriptParams/properties/after_id",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/ListTranscriptParams/properties/before_id",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/ListTranscriptParams/properties/created_on",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/ListTranscriptParams/properties/limit",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/ListTranscriptParams/properties/throttled_only",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/ParagraphsResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/PurgeLemurRequestDataResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/RealtimeTemporaryTokenResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/RedactedAudioResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/SentencesResponse",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/SubtitleFormat",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/Transcript",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/TranscriptList",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/TranscriptParams",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/TranscriptReadyNotification",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/TranscriptStatus",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/UploadedFile",
-    "assemblyai-openapi-original.yml: dangling $ref: #/components/schemas/WordSearchResponse"
-  ],
+  "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "assemblyai-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "assemblyai-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+0 apis, 1 total)"
   ],
-  "skipped": [
-    "assemblyai-lemur-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "assemblyai-streaming-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "assemblyai-transcript-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }
