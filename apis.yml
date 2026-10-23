@@ -83,6 +83,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/assemblyai-asyncapi.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/assemblyai/overview
 - type: RateLimits
   url: rate-limits/assemblyai-rate-limits.yml
 - type: FinOps
