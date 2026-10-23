@@ -349,3 +349,16 @@
     signal_note: one edge per (provider, platform); triggers, actions and applet counts are context, never read
   status: not-a-workflow
   arazzo: null
+- slug: assemblyai-hugging-face-hugging-face-hub
+  label: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_name: Hugging Face (hugging-face-hub)
+  category: Hugging Face Hub models
+  type: marketplace
+  marketplace: hugging-face-hub
+  channel: partner-built
+  evidence: https://huggingface.co/assemblyai
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

@@ -24,6 +24,7 @@ checked:
 - https://ifttt.com/assemblyai
 - https://ifttt.com/explore/services
 - https://ifttt.com/sitemap_services.xml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -324,6 +325,29 @@ edges:
     signal_note: one edge per (provider, platform); triggers, actions and applet counts are context, never read
   detected_by: sweep-ifttt-services.py
   first_seen: '2026-10-23'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/assemblyai
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - assemblyai/bert-large-uncased-sst2
+  - assemblyai/distilbert-base-uncased-sst2
+  - assemblyai/distilbert-base-uncased-qqp
+  - assemblyai/Conformer1-Demo
+  - assemblyai/Conformer2-Demo
+  listing_count: 2
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub models
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://zapier.com/api/v4/apps/
