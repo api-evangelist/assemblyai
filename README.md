@@ -1,4 +1,4 @@
-# AssemblyAI (assemblyai)
+# AssemblyAI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,88 +66,153 @@
 
 Built by AI experts, AssemblyAI's Speech AI models include accurate speech-to-text for voice data (such as calls, virtual meetings, and podcasts), speaker detection, sentiment analysis, chapter detection, PII redaction, and more. AssemblyAI provides powerful APIs for transcribing and understanding audio data at scale. The platform supports real-time streaming transcription via WebSocket, asynchronous batch transcription, and audio intelligence features including summarization, auto chapters, entity detection, and content safety filtering. SDKs are available for Python, Node.js, Ruby, Java, and Go.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/assemblyai/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Audio · Speech · Transcription · Speech-to-Text · Voice · Real-Time · Voice AI
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## AssemblyAI on APIs.io
 
-## Tags:
+Everything profiled for AssemblyAI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/assemblyai/](https://apis.io/providers/assemblyai/)** — or go straight to one of the APIs or properties below.
 
- - AI, Artificial Intelligence, Audio, Speech, Transcription, Speech to Text
+### APIs (3)
 
-## Timestamps
+- [AssemblyAI LeMUR API](https://apis.io/apis/assemblyai/assemblyai-lemur-api/) — LeMUR related operations
+- [AssemblyAI Streaming API](https://apis.io/apis/assemblyai/assemblyai-streaming-api/) — Streaming Speech-to-Text
+- [AssemblyAI Transcript API](https://apis.io/apis/assemblyai/assemblyai-transcript-api/) — Transcript related operations
 
-- **Created:** 2024-06-06
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### AssemblyAI API
-The AssemblyAI API provides speech-to-text transcription, speaker diarization, sentiment analysis, chapter detection, PII redaction, and other audio intelligence capabilities via REST and WebSocket interfaces.
+#### AsyncAPI (1)
 
-**Human URL:** [https://www.assemblyai.com/docs/](https://www.assemblyai.com/docs/)
+Event-driven and webhook contracts.
 
-#### Tags:
+- [AssemblyAI Universal Streaming Speech-to-Text API](https://apis.io/asyncapis/assemblyai/assemblyai-asyncapi/)
 
- - Audio Intelligence, Speech to Text, Transcription
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
+- [/v3/ws](https://apis.io/channels/assemblyai/v3-ws/)
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/assemblyai/](https://apis.io/graphqls/assemblyai/assemblyai-graphql/)
+
+#### Agent skills (1)
+
+Agent skills built on the API.
+
+- [assemblyai](https://apis.io/agent-skills/assemblyai/assemblyai/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Assemblyai Agentic Access](https://apis.io/agentic-access/assemblyai/assemblyai-agentic-access/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [AssemblyAI LeMUR API](https://apis.io/collections/assemblyai/open-assemblyai-lemur-api/)
+- [AssemblyAI LeMUR Streaming API](https://apis.io/collections/assemblyai/open-assemblyai-streaming-api/)
+- [AssemblyAI LeMUR Transcript API](https://apis.io/collections/assemblyai/open-assemblyai-transcript-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [AssemblyAI — asyncapi rules](https://apis.io/rules/assemblyai/assemblyai-asyncapi-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Assemblyai Domain Security](https://apis.io/security/assemblyai/assemblyai-domain-security/)
+- [Assemblyai Trust Center](https://apis.io/security/assemblyai/assemblyai-trust-center/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Assemblyai Plans Pricing](https://apis.io/plans/assemblyai/assemblyai-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Assemblyai Rate Limits](https://apis.io/rate-limits/assemblyai/assemblyai-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Assemblyai Finops](https://apis.io/finops/assemblyai/assemblyai-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.assemblyai.com/)
 - [Documentation](https://www.assemblyai.com/docs/)
-- [GettingStarted](https://www.assemblyai.com/docs/getting-started/transcribe-an-audio-file)
-- [Authentication](https://www.assemblyai.com/docs/concepts/authentication)
-- [APIReference](https://www.assemblyai.com/docs/api-reference/overview)
-- [OpenAPI](openapi/assemblyai-openapi-original.yml)
-- [AsyncAPI](openapi/assemblyai-asyncapi-original.yml)
-
-## Common Properties
-
-- [AssemblyAI Website](https://www.assemblyai.com/)
-- [Documentation](https://www.assemblyai.com/docs/)
-- [Blog](https://www.assemblyai.com/blog)
-- [Sign Up](https://www.assemblyai.com/dashboard/signup)
-- [Login](https://www.assemblyai.com/dashboard/login)
 - [Pricing](https://www.assemblyai.com/pricing)
-- [AssemblyAI GitHub Organization](https://github.com/AssemblyAI)
-- [Status Page](https://status.assemblyai.com/)
+- [Blog](https://www.assemblyai.com/blog)
+- [GitHub](https://github.com/AssemblyAI)
+- [Status](https://status.assemblyai.com/)
 
-## Artifacts
+## API Evangelist rating
 
-### OpenAPI
+**Kin Score 44.9** — developing · rubric 0.25.0 · scored 2026-10-23
 
-- [AssemblyAI OpenAPI](openapi/assemblyai-openapi-original.yml)
-- [AssemblyAI AsyncAPI](openapi/assemblyai-asyncapi-original.yml)
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.4 |
+| Contract governance | 11.4 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 46.9 |
+| Access clarity | 56.6 |
 
-## Features
+**Agent readiness 29.5** — agent-ready
 
-| Name | Description |
-|------|-------------|
-| Speech-to-Text Transcription | High-accuracy transcription of audio files and streams using AssemblyAI's Universal-2 model with support for 99+ languages and custom vocabulary. |
-| Real-Time Streaming Transcription | WebSocket-based streaming transcription for live audio with partial results and final transcripts, supporting call centers, live captioning, and voice applications. |
-| Speaker Diarization | Automatic speaker detection and labeling that identifies who said what in multi-speaker recordings. |
-| Audio Intelligence | Advanced understanding features including sentiment analysis, summarization, auto chapters, entity detection, content safety filtering, and PII redaction. |
-| LeMUR | LeMUR (Leveraging Large Language Models for Understanding Recordings) enables asking questions of audio transcripts using a conversational AI interface built on top of transcriptions. |
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | unknown |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
 
-## Use Cases
+**Regulatory alignment 15.5** — AI & Biometrics
 
-| Name | Description |
-|------|-------------|
-| Call Center Analytics | Customer service teams transcribe and analyze customer calls for quality assurance, compliance, agent coaching, and sentiment analysis. |
-| Meeting Intelligence | Enterprises transcribe virtual meetings (Zoom, Teams, Meet) to generate summaries, action items, and searchable archives. |
-| Podcast Processing | Podcast producers transcribe episodes for SEO, accessibility, show notes, and content repurposing. |
-| Voice Application Development | Developers build voice-powered applications using real-time streaming transcription for voice commands, dictation, and conversation interfaces. |
-| Compliance and Legal | Legal and compliance teams transcribe depositions, hearings, and recorded communications with PII redaction and timestamped transcripts. |
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/assemblyai/](https://apis.io/providers/assemblyai/).
 
-## Integrations
+## How this profile is made
 
-| Name | Description |
-|------|-------------|
-| Twilio | Integration with Twilio Media Streams for transcribing phone calls in real-time using AssemblyAI's streaming API. |
-| Zoom | Integration with Zoom recordings for batch transcription and meeting intelligence processing. |
-| Python SDK | Official Python SDK for AssemblyAI available on PyPI (assemblyai) for easy integration in Python applications. |
-| Node.js SDK | Official Node.js SDK for AssemblyAI available on npm (@assemblyai/sdk) for JavaScript and TypeScript applications. |
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-## Maintainers
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AssemblyAI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-**FN:** Kin Lane
+## Open an issue
 
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/assemblyai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
