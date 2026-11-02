@@ -1,0 +1,165 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.assemblyai.com/pricing
+sources:
+- https://www.assemblyai.com/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+  managed_tier: Universal-2
+published: true
+note: Pay-as-you-go per-hour-of-audio pricing across STT, speech understanding, guardrails add-ons, plus
+  per-token LLM Gateway rates; enterprise is Contact us. In-region (US/EU) LLM pricing stated as 10% higher.
+plan_count: 9
+currency: USD
+plans:
+- name: Universal-3.5 Pro (pre-recorded)
+  price_text: $0.21 /hr
+  price: 0.21
+  currency: USD
+  period: per-use
+  unit: hour of audio
+- name: Universal-2 (pre-recorded)
+  price_text: $0.15 /hr
+  price: 0.15
+  currency: USD
+  period: per-use
+  unit: hour of audio
+- name: Universal-3.6 Pro Realtime
+  price_text: $0.45 /hr
+  price: 0.45
+  currency: USD
+  period: per-use
+  unit: hour of audio
+- name: Sync API
+  price_text: $0.30 /hr
+  price: 0.3
+  currency: USD
+  period: per-use
+  unit: hour of audio
+  included_quota: Keyterms Prompting and Conversation Context included
+- name: Voice Agent API
+  price_text: $4.50/hr ($0.075/min)
+  currency: USD
+  period: per-use
+  unit: hour of connected conversation time
+  included_quota: All features included; billed per second
+- name: Dictation API
+  price_text: $0.62 /hr
+  price: 0.62
+  currency: USD
+  period: per-use
+  unit: hour
+  included_quota: Keyterms Prompting, Prompting, Output Instruction included
+- name: Custom / Enterprise
+  price_text: Contact us
+  period: none
+  included_quota: Custom rate limits, enhanced concurrency
+- name: GPT-5 Nano (LLM Gateway)
+  price_text: $0.05 / 1M
+  price: 0.05
+  currency: USD
+  period: per-use
+  unit: 1M input tokens
+- name: GPT-6 Astra (LLM Gateway)
+  price_text: $10.00 / 1M
+  price: 10
+  currency: USD
+  period: per-use
+  unit: 1M input tokens
+rate_limit_statements:
+- On the free plan, you can open up to 5 new streaming connections per minute.
+- On the pay-as-you-go plan, your starting limit is 100 sessions per minute — anytime you are utilizing
+  70% or more of your current limit, the number of new streams able to be opened over the next minute
+  will automatically increase by 10%.
+- The free tier includes up to 185 hours of pre-recorded transcription and up to 333 hours of streaming
+  transcription.
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  units:
+  - compute
+  - token
+  plans:
+  - name: Universal-3.5 Pro (pre-recorded)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Universal-2 (pre-recorded)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Universal-3.6 Pro Realtime
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Sync API
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Voice Agent API
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Dictation API
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - other
+  - name: Custom / Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: GPT-5 Nano (LLM Gateway)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: GPT-6 Astra (LLM Gateway)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
