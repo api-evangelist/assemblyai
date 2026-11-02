@@ -83,7 +83,7 @@ rate_limit_statements:
 - The free tier includes up to 185 hours of pre-recorded transcription and up to 333 hours of streaming
   transcription.
 x-canonical:
-  generated: '2026-11-01'
+  generated: '2026-11-02'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
